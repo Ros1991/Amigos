@@ -1,0 +1,27 @@
+.pull-right-fix{
+    position:absolute;
+    right:8px;
+    top:56px;
+}
+
+.tblStrech{
+    width:100%;
+}
+
+.player-options
+{
+    border-top:0px;
+    display:none;
+}
+
+div.expand div.player-options {
+    display:block !important;
+}
+
+.img-detail
+{
+    width:20px;
+    height:20px;
+    margin-left:5px;
+    float:right;
+}

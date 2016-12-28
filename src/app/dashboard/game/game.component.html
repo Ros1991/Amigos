@@ -1,0 +1,170 @@
+<!--<div>
+    <div class='wrapper'>
+        <div class='container' [dragula]='"first-bag"'>
+            <div>You can move these elements between these two containers</div>
+            <div>Moving them anywhere else isn't quite possible</div>
+            <div>There's also the possibility of moving elements around in the same container, changing their position</div>
+        </div>
+        <div class='container' [dragula]='"first-bag"'>
+            <div>This is the default use case. You only need to specify the containers you want to use</div>
+            <div>More interactive use cases lie ahead</div>
+            <div>Make sure to check out the <a href='https://github.com/bevacqua/dragula#readme'>documentation on GitHub!</a></div>
+        </div>
+    </div>
+</div>-->
+
+
+
+<div class="animate">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card">
+                    <div class="card-inverse card-info card-header">
+                        <div>
+                            <h5 class="card-inverse card-title">
+                                Ordem de chegada
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <input type="text" name="nameInput" [(ngModel)]="newPlayer">
+                        <button type="button" class="pull-right-fix btn btn-success btn-circle btn-sm" (click)="addPlayerToOrder()"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="card-block" [dragula]='"first-bag"'>
+                        <div class="list-group-item" *ngFor='let item of ordemDeChegada'>
+                            {{item.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-inverse card-info card-header">
+                        <div>
+                            <h5 class="card-inverse card-title">
+                                Partida em andamento
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <h1 class="text-xs-center">
+                            {{time1Goals}}     X     {{time2Goals}}
+                        </h1>
+                    </div>
+
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="card">
+                                    <div class="card-inverse card-primary card-header">
+                                        <div>
+                                            <h5 class="card-inverse card-title  text-xs-center">
+                                                Time Azul
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div [dragula]='"second-bag"'>
+                                        <div *ngFor='let item of Current.time1'>
+                                            <div [class.expand]="showMenu === item.id">
+                                                <div class="list-group-item" (click)="addExpandClass(item.id)">
+                                                    {{item.name}}
+                                                    <a (click)="desmarcarGol(item.id)"><img *ngFor="let a of countAssistent(item.gols)" src="assets/images/gol.png" class="img-detail" /></a>
+                                                    <a (click)="desmarcarGolAssist(item.id)"><img *ngFor="let a of countAssistent(item.assistencias)" src="assets/images/Assitencia.png" class="img-detail" /></a>
+                                                    <a (click)="desmarcarGolContra(item.id)"><img *ngFor="let a of countAssistent(item.golsContra)" src="assets/images/GolContra.png" class="img-detail" /></a>
+                                                </div>
+                                                <div class="list-group-item player-options">
+                                                    <table class="tblStrech">
+                                                        <tr>
+                                                            <td align="center">
+                                                                <a (click)="marcarGol(item.id)">
+                                                                    <img src="assets/images/gol.png" class="user-avatar" />
+                                                                </a>
+                                                            </td>
+                                                            <td align="center">
+                                                                <a (click)="marcarGolAssist(item.id)">
+                                                                    <img src="assets/images/Assitencia.png" class="user-avatar" />
+                                                                </a>
+                                                            </td>
+                                                            <td align="center">
+                                                                <a (click)="marcarGolContra(item.id)">
+                                                                    <img src="assets/images/GolContra.png" class="user-avatar" />
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="card">
+                                    <div class="card-inverse card-warning card-header">
+                                        <div>
+                                            <h5 class="card-inverse card-title  text-xs-center">
+                                                Time Amarelo
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div [dragula]='"second-bag"'>
+                                        <div *ngFor='let item of Current.time2'>
+                                            <div [class.expand]="showMenu === item.id">
+                                                <div class="list-group-item" (click)="addExpandClass(item.id)">
+                                                    {{item.name}}
+                                                    <a (click)="desmarcarGol(item.id)"><img *ngFor="let a of countAssistent(item.gols)" src="assets/images/gol.png" class="img-detail" /></a>
+                                                    <a (click)="desmarcarGolAssist(item.id)"><img *ngFor="let a of countAssistent(item.assistencias)" src="assets/images/Assitencia.png" class="img-detail" /></a>
+                                                    <a (click)="desmarcarGolContra(item.id)"><img *ngFor="let a of countAssistent(item.golsContra)" src="assets/images/GolContra.png" class="img-detail" /></a>
+                                                </div>
+                                                <div class="list-group-item player-options">
+                                                    <table class="tblStrech">
+                                                        <tr>
+                                                            <td align="center">
+                                                                <a (click)="marcarGol(item.id)">
+                                                                    <img src="assets/images/gol.png" class="user-avatar" />
+                                                                </a>
+                                                            </td>
+                                                            <td align="center">
+                                                                <a (click)="marcarGolAssist(item.id)">
+                                                                    <img src="assets/images/Assitencia.png" class="user-avatar" />
+                                                                </a>
+                                                            </td>
+                                                            <td align="center">
+                                                                <a (click)="marcarGolContra(item.id)">
+                                                                    <img src="assets/images/GolContra.png" class="user-avatar" />
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="card">
+                                    <div class="card-inverse card-info card-header">
+                                        <div>
+                                            <h5 class="card-inverse card-title">
+                                                Proxima
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="row" [dragula]='"second-bag"'>
+                                            <div class="list-group-item" *ngFor='let item of proximos'>
+                                                {{item.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
