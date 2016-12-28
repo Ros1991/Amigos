@@ -30,9 +30,15 @@
                     <div class="card-block">
                         <input type="text" name="nameInput" [(ngModel)]="newPlayer">
                         <button type="button" class="pull-right-fix btn btn-success btn-circle btn-sm" (click)="addPlayerToOrder()"><i class="fa fa-plus"></i></button>
+                        <label class="checkbox1">
+                            <input name="goleiroChk" type="checkbox" [(ngModel)]="isGoalkeeper">
+                            <span class="remove-margim"></span>
+                            <img src="assets/images/goleiro.png" class="img-detail-goalkeeper" />
+                        </label>
                     </div>
                     <div class="card-block" [dragula]='"first-bag"'>
                         <div class="list-group-item" *ngFor='let item of ordemDeChegada'>
+                            <img *ngIf="item.goleiro" src="assets/images/goleiro.png" class="img-detail-goalkeeper" />
                             {{item.name}}
                         </div>
                     </div>
@@ -45,17 +51,45 @@
                             <h5 class="card-inverse card-title">
                                 Partida em andamento
                             </h5>
+                            <button type="button" class="pull-right-fix-header btn-primary btn btn-circle btn-sm" (click)="showConfig()"><i class="fa fa-gear"></i></button>
                         </div>
                     </div>
                     <div class="card-block">
-                        <h1 class="text-xs-center">
-                            {{time1Goals}}     X     {{time2Goals}}
-                        </h1>
-                    </div>
-
-                    <div class="card-block">
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-lg-12" *ngIf="confShow">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Numero de jogadores</label>
+                                                    <input type="email" class="form-control" name="confNumberPlayersInput" [(ngModel)]="confNumberPlayers">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Duas Seguidas</label>
+                                                    <div class="config-switch switch">
+                                                        <input type="checkbox" [(ngModel)]="confPrimeiraDuasPartidas" name="confPrimeiraDuasPartidasChk">
+                                                        <label>
+                                                            <div></div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <button type="button" (click)="tirarAzul()" class="btn btn-primary">Tirar time azul</button>
+                                                <button type="button" (click)="tirarAmarelo()" class="btn btn-warning">Tirar time amarelo</button>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <button type="button" (click)="applyConfig()" class="btn btn-success">Aplicar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
                                 <div class="card">
                                     <div class="card-inverse card-primary card-header">
                                         <div>
@@ -97,9 +131,39 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div *ngIf="Current.goleiroTime1" [class.expand]="showMenu === Current.goleiroTime1.id">
+                                        <div class="list-group-item" (click)="addExpandClass(Current.goleiroTime1.id)">
+                                            <img src="assets/images/goleiro.png" class="img-detail-goalkeeper" />
+                                            {{Current.goleiroTime1.name}}
+                                            <a (click)="desmarcarGol(Current.goleiroTime1.id)"><img *ngFor="let a of countAssistent(Current.goleiroTime1.gols)" src="assets/images/gol.png" class="img-detail" /></a>
+                                            <a (click)="desmarcarGolAssist(Current.goleiroTime1.id)"><img *ngFor="let a of countAssistent(Current.goleiroTime1.assistencias)" src="assets/images/Assitencia.png" class="img-detail" /></a>
+                                            <a (click)="desmarcarGolContra(Current.goleiroTime1.id)"><img *ngFor="let a of countAssistent(Current.goleiroTime1.golsContra)" src="assets/images/GolContra.png" class="img-detail" /></a>
+                                        </div>
+                                        <div class="list-group-item player-options">
+                                            <table class="tblStrech">
+                                                <tr>
+                                                    <td align="center">
+                                                        <a (click)="marcarGol(Current.goleiroTime1.id)">
+                                                            <img src="assets/images/gol.png" class="user-avatar" />
+                                                        </a>
+                                                    </td>
+                                                    <td align="center">
+                                                        <a (click)="marcarGolAssist(Current.goleiroTime1.id)">
+                                                            <img src="assets/images/Assitencia.png" class="user-avatar" />
+                                                        </a>
+                                                    </td>
+                                                    <td align="center">
+                                                        <a (click)="marcarGolContra(Current.goleiroTime1.id)">
+                                                            <img src="assets/images/GolContra.png" class="user-avatar" />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col-lg-6">
                                 <div class="card">
                                     <div class="card-inverse card-warning card-header">
                                         <div>
@@ -141,9 +205,68 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div *ngIf="Current.goleiroTime2" [class.expand]="showMenu === Current.goleiroTime2.id">
+                                        <div class="list-group-item" (click)="addExpandClass(Current.goleiroTime2.id)">
+                                            <img src="assets/images/goleiro.png" class="img-detail-goalkeeper" />
+                                            {{Current.goleiroTime2.name}}
+                                            <a (click)="desmarcarGol(Current.goleiroTime2.id)"><img *ngFor="let a of countAssistent(Current.goleiroTime2.gols)" src="assets/images/gol.png" class="img-detail" /></a>
+                                            <a (click)="desmarcarGolAssist(Current.goleiroTime2.id)"><img *ngFor="let a of countAssistent(Current.goleiroTime2.assistencias)" src="assets/images/Assitencia.png" class="img-detail" /></a>
+                                            <a (click)="desmarcarGolContra(Current.goleiroTime2.id)"><img *ngFor="let a of countAssistent(Current.goleiroTime2.golsContra)" src="assets/images/GolContra.png" class="img-detail" /></a>
+                                        </div>
+                                        <div class="list-group-item player-options">
+                                            <table class="tblStrech">
+                                                <tr>
+                                                    <td align="center">
+                                                        <a (click)="marcarGol(Current.goleiroTime2.id)">
+                                                            <img src="assets/images/gol.png" class="user-avatar" />
+                                                        </a>
+                                                    </td>
+                                                    <td align="center">
+                                                        <a (click)="marcarGolAssist(Current.goleiroTime2.id)">
+                                                            <img src="assets/images/Assitencia.png" class="user-avatar" />
+                                                        </a>
+                                                    </td>
+                                                    <td align="center">
+                                                        <a (click)="marcarGolContra(Current.goleiroTime2.id)">
+                                                            <img src="assets/images/GolContra.png" class="user-avatar" />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-9">
+
+                                <table class="tblStrech">
+                                    <tr>
+                                        <td align="center">
+                                            <h1 class="text-xs-center">                <span class="team-blue">Azul</span></h1>
+                                        </td>
+                                        <td align="center">
+                                            <h1 class="text-xs-center">{{time1Goals}}     X     {{time2Goals}}</h1>
+                                        </td>
+                                        <td align="center">
+                                            <h1 class="text-xs-center">    <span class="team-yellow">Amarelo</span></h1>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="center">
+                                            <button type="button" (click)="voltarJogo()" class="btn btn-sm btn-rounded">Voltar</button>
+                                        </td>
+                                        <td align="center">
+                                            <button type="button" (click)="finalizarJogo()" class="btn btn-lg btn-success btn-rounded">Finalizar</button>
+                                        </td>
+                                        <td align="center">
+                                            <button type="button" class="btn btn-sm btn-rounded">Vou pensar</button>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div class="col-lg-3">
                                 <div class="card">
                                     <div class="card-inverse card-info card-header">
                                         <div>
@@ -153,8 +276,9 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="row" [dragula]='"second-bag"'>
+                                        <div [dragula]='"second-bag"'>
                                             <div class="list-group-item" *ngFor='let item of proximos'>
+                                                <img *ngIf="item.goleiro" src="assets/images/goleiro.png" class="img-detail-goalkeeper" />
                                                 {{item.name}}
                                             </div>
                                         </div>

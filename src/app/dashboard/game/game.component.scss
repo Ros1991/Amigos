@@ -4,6 +4,19 @@
     top:56px;
 }
 
+.config-switch
+{
+    margin:0px;
+    display:block;
+}
+
+.pull-right-fix-header
+{
+    position:absolute;
+    right:8px;
+    top:8px;
+}
+
 .tblStrech{
     width:100%;
 }
@@ -12,6 +25,11 @@
 {
     border-top:0px;
     display:none;
+}
+
+.remove-margim
+{
+    margin:0px;
 }
 
 div.expand div.player-options {
@@ -24,4 +42,18 @@ div.expand div.player-options {
     height:20px;
     margin-left:5px;
     float:right;
+}
+
+.img-detail-goalkeeper
+{
+    width:20px;
+    height:20px;
+}
+
+.team-yellow{
+    color: #f0ad4e;
+}
+
+.team-blue{
+    color: #2A4690;
 }
