@@ -10,12 +10,14 @@ import './owlCarousel/owl.carousel.min.js';
 
 export class GamesComponent {
     constructor() {
+        
+    }
+
+    ngOnInit() {
         $(document).ready(function () {
             $('.owl-carousel').owlCarousel();
         });
     }
-
-
         
     
 }
