@@ -6,11 +6,11 @@
     public goleiroTime1: Jogador;
     public goleiroTime2: Jogador;
     public proximas: Array<Jogador>;
-    public timeVantagem: number;
+    public timeVantagem: string;
 
     constructor() {
         this.numDeJog = 6;
-        this.timeVantagem = 1;
+        this.timeVantagem = '1';
     }
 
     pegaLinhas() {

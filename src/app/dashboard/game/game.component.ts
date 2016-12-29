@@ -34,28 +34,28 @@ export class GameComponent {
     confShow: boolean;
 
     createFake() {
-        this.newPlayer = 'Acival';
-        this.addPlayerToOrder();
-        this.newPlayer = 'Wilker';
-        this.addPlayerToOrder();
-        this.newPlayer = 'Marcelo R';
-        this.addPlayerToOrder();
-        this.newPlayer = 'Marcelao';
-        this.addPlayerToOrder();
-        this.newPlayer = 'Filipe S';
-        this.addPlayerToOrder();
-        this.newPlayer = 'Paulao';
-        this.addPlayerToOrder();
-        this.newPlayer = 'Felipe P';
-        this.addPlayerToOrder();
-        this.newPlayer = 'Antonio';
-        this.addPlayerToOrder();
-        this.newPlayer = 'Cordeiro';
-        this.addPlayerToOrder();
-        this.newPlayer = 'Vassoler';
-        this.addPlayerToOrder();
-        this.newPlayer = 'Klayton';
-        this.addPlayerToOrder();
+        //this.newPlayer = 'Acival';
+        //this.addPlayerToOrder();
+        //this.newPlayer = 'Wilker';
+        //this.addPlayerToOrder();
+        //this.newPlayer = 'Marcelo R';
+        //this.addPlayerToOrder();
+        //this.newPlayer = 'Marcelao';
+        //this.addPlayerToOrder();
+        //this.newPlayer = 'Filipe S';
+        //this.addPlayerToOrder();
+        //this.newPlayer = 'Paulao';
+        //this.addPlayerToOrder();
+        //this.newPlayer = 'Felipe P';
+        //this.addPlayerToOrder();
+        //this.newPlayer = 'Antonio';
+        //this.addPlayerToOrder();
+        //this.newPlayer = 'Cordeiro';
+        //this.addPlayerToOrder();
+        //this.newPlayer = 'Vassoler';
+        //this.addPlayerToOrder();
+        //this.newPlayer = 'Klayton';
+        //this.addPlayerToOrder();
         //this.newPlayer = 'Leo A';
         //this.addPlayerToOrder();
         //this.newPlayer = 'Marcelo M';
@@ -105,9 +105,26 @@ export class GameComponent {
         this.proximos = new Array<Jogador>();
         this.Current.time1 = [];
         this.Current.time2 = [];
+        this.Current.timeVantagem = '1';
         this.createFake();
     }
 
+    remontarTimes() {
+        this.time1Goals = 0;
+        this.time2Goals = 0;
+        this.Current = new Partida;
+        this.Current.numDeJog = this.confNumberPlayers;
+        this.desmarcarClick = false;
+        this.jogosFinalizados = new Array<Partida>();
+        this.proximos = new Array<Jogador>();
+        this.Current.time1 = [];
+        this.Current.time2 = [];
+        this.Current.timeVantagem = '1';
+        for (let plr in this.ordemDeChegada) {
+            this.addPlayerToGame(this.ordemDeChegada[plr].id, this.ordemDeChegada[plr].name, this.ordemDeChegada[plr].goleiro);
+        }
+        this.confShow = false;
+    }
 
     showConfig() {
         this.confShow = !this.confShow;
@@ -188,89 +205,118 @@ export class GameComponent {
         return jogadores;
     }
 
+    pegaQtdProximosLinha() {
+        var qtdProximos = 0;
+        for (let plr in this.proximos) {
+            if (!this.proximos[plr].goleiro) {
+                qtdProximos = qtdProximos + 1;
+            }
+        }
+        return qtdProximos;
+    }
+
     finalizarJogo() {
         this.Current.proximas = this.proximos;
         this.jogosFinalizados.push(this.Current.clone());
         var placar1 = this.Current.time1Goals();
         var placar2 = this.Current.time2Goals();
         var novoJogo = new Partida();
-        if ((placar1 > placar2) || (placar2 == placar1 && this.Current.timeVantagem == 1 && this.proximos.length < 10)) {
+        if (this.confPrimeiraDuasPartidas && this.jogosFinalizados.length == 1) {
             novoJogo.time1 = this.renewList(this.Current.time1);
-            novoJogo.goleiroTime1 = this.Current.goleiroTime1;
-            this.proximos = this.proximos.concat(this.Current.time2);
-            if (this.Current.goleiroTime2)
-                this.proximos.push(this.Current.goleiroTime2);
-            novoJogo.timeVantagem = 2;
-            novoJogo.time2 = [];
-        }
-        if ((placar2 > placar1) || (placar2 == placar1 && this.Current.timeVantagem == 2 && this.proximos.length < 10)) {
             novoJogo.time2 = this.renewList(this.Current.time2);
+            novoJogo.goleiroTime1 = this.Current.goleiroTime1;
             novoJogo.goleiroTime2 = this.Current.goleiroTime2;
-            this.proximos = this.proximos.concat(this.Current.time1);
-            if (this.Current.goleiroTime1)
-                this.proximos.push(this.Current.goleiroTime1);
-            novoJogo.timeVantagem = 1;
-            novoJogo.time1 = [];
-        }
-        if (placar2 == placar1) {
-            if (this.proximos.length > 10) {
-                if (this.Current.timeVantagem == 1) {
-                    this.proximos = this.proximos.concat(this.Current.time1);
-                    if (this.Current.goleiroTime1)
-                        this.proximos = this.proximos.concat(this.Current.goleiroTime1);
-                    this.proximos = this.proximos.concat(this.Current.time2);
-                    if (this.Current.goleiroTime2)
-                        this.proximos = this.proximos.concat(this.Current.goleiroTime2);
-                }
-                if (this.Current.timeVantagem == 2) {
-                    this.proximos = this.proximos.concat(this.Current.time2);
-                    if (this.Current.goleiroTime2)
-                        this.proximos = this.proximos.concat(this.Current.goleiroTime2);
-                    this.proximos = this.proximos.concat(this.Current.time1);
-                    if (this.Current.goleiroTime1)
-                        this.proximos = this.proximos.concat(this.Current.goleiroTime1);
-                }
-                novoJogo.time1 = [];
-                novoJogo.time2 = [];
-            }
-        }
-        if (!novoJogo.goleiroTime1 && !novoJogo.goleiroTime2) {
-            if (novoJogo.timeVantagem == 1) {
-                novoJogo.goleiroTime1 = this.pegarProximoGoleiro(true);
-                novoJogo.goleiroTime2 = this.pegarProximoGoleiro(true);
-            }
-            else {
-                novoJogo.goleiroTime2 = this.pegarProximoGoleiro(true);
-                novoJogo.goleiroTime1 = this.pegarProximoGoleiro(true);
-            }
-
-        }
-        else {
-
-            if (novoJogo.goleiroTime1 && !this.pegarProximoGoleiro(false)) {
+            if (!novoJogo.goleiroTime2 && placar1 > placar2) {
                 novoJogo.goleiroTime2 = novoJogo.goleiroTime1;
                 novoJogo.goleiroTime1 = null;
             }
-            else if (novoJogo.goleiroTime1 && this.pegarProximoGoleiro(false)) {
-                novoJogo.goleiroTime2 = this.pegarProximoGoleiro(true);
+        }
+        else {
+            if (this.confPrimeiraDuasPartidas && this.jogosFinalizados.length == 2) {
+                placar1 = placar1 + this.jogosFinalizados[0].time1Goals();
+                placar2 = placar2 + this.jogosFinalizados[0].time2Goals();
+            }
+            if ((placar1 > placar2) || (placar2 == placar1 && this.Current.timeVantagem == '1' && this.pegaQtdProximosLinha() < 10)) {
+                novoJogo.time1 = this.renewList(this.Current.time1);
+                novoJogo.goleiroTime1 = this.Current.goleiroTime1;
+                this.proximos = this.proximos.concat(this.Current.time2);
+                if (this.Current.goleiroTime2)
+                    this.proximos.push(this.Current.goleiroTime2);
+                novoJogo.timeVantagem = '2';
+                novoJogo.time2 = [];
             }
             else {
-                if (novoJogo.goleiroTime2 && !this.pegarProximoGoleiro(false)) {
-                    novoJogo.goleiroTime1 = novoJogo.goleiroTime2;
-                    novoJogo.goleiroTime2 = null;
+                if ((placar2 > placar1) || (placar2 == placar1 && this.Current.timeVantagem == '2' && this.pegaQtdProximosLinha() < 10)) {
+                    novoJogo.time2 = this.renewList(this.Current.time2);
+                    novoJogo.goleiroTime2 = this.Current.goleiroTime2;
+                    this.proximos = this.proximos.concat(this.Current.time1);
+                    if (this.Current.goleiroTime1)
+                        this.proximos.push(this.Current.goleiroTime1);
+                    novoJogo.timeVantagem = '1';
+                    novoJogo.time1 = [];
+                } else {
+                    if (placar2 == placar1) {
+                        if (this.pegaQtdProximosLinha() > 10) {
+                            if (this.Current.timeVantagem == '1') {
+                                this.proximos = this.proximos.concat(this.Current.time1);
+                                if (this.Current.goleiroTime1)
+                                    this.proximos = this.proximos.concat(this.Current.goleiroTime1);
+                                this.proximos = this.proximos.concat(this.Current.time2);
+                                if (this.Current.goleiroTime2)
+                                    this.proximos = this.proximos.concat(this.Current.goleiroTime2);
+                            }
+                            if (this.Current.timeVantagem == '2') {
+                                this.proximos = this.proximos.concat(this.Current.time2);
+                                if (this.Current.goleiroTime2)
+                                    this.proximos = this.proximos.concat(this.Current.goleiroTime2);
+                                this.proximos = this.proximos.concat(this.Current.time1);
+                                if (this.Current.goleiroTime1)
+                                    this.proximos = this.proximos.concat(this.Current.goleiroTime1);
+                            }
+                            novoJogo.time1 = [];
+                            novoJogo.time2 = [];
+                        }
+                    }
                 }
-                else if (novoJogo.goleiroTime2 && this.pegarProximoGoleiro(false)) {
+            }
+            if (!novoJogo.goleiroTime1 && !novoJogo.goleiroTime2) {
+                if (novoJogo.timeVantagem == '1') {
                     novoJogo.goleiroTime1 = this.pegarProximoGoleiro(true);
+                    novoJogo.goleiroTime2 = this.pegarProximoGoleiro(true);
+                }
+                else {
+                    novoJogo.goleiroTime2 = this.pegarProximoGoleiro(true);
+                    novoJogo.goleiroTime1 = this.pegarProximoGoleiro(true);
+                }
+
+            }
+            else {
+
+                if (novoJogo.goleiroTime1 && !this.pegarProximoGoleiro(false)) {
+                    novoJogo.goleiroTime2 = novoJogo.goleiroTime1;
+                    novoJogo.goleiroTime1 = null;
+                }
+                else if (novoJogo.goleiroTime1 && this.pegarProximoGoleiro(false)) {
+                    novoJogo.goleiroTime2 = this.pegarProximoGoleiro(true);
+                }
+                else {
+                    if (novoJogo.goleiroTime2 && !this.pegarProximoGoleiro(false)) {
+                        novoJogo.goleiroTime1 = novoJogo.goleiroTime2;
+                        novoJogo.goleiroTime2 = null;
+                    }
+                    else if (novoJogo.goleiroTime2 && this.pegarProximoGoleiro(false)) {
+                        novoJogo.goleiroTime1 = this.pegarProximoGoleiro(true);
+                    }
                 }
             }
         }
-
         this.showMenu = '0';
         this.Current = novoJogo;
         this.Current.numDeJog = this.confNumberPlayers;
         this.time1Goals = 0;
         this.time2Goals = 0;
         this.preencherTimesComProximos();
+
     }
 
     voltarJogo() {
@@ -282,6 +328,61 @@ export class GameComponent {
             this.time1Goals = this.Current.time1Goals();
             this.time2Goals = this.Current.time2Goals();
         }
+    }
+
+    removePlayer(playerID) {
+        var found = false;
+        if (this.Current.goleiroTime1 && this.Current.goleiroTime1.id == playerID) {
+            if (this.pegarProximoGoleiro(false)) {
+                this.Current.goleiroTime1 = this.pegarProximoGoleiro(true);
+            }
+            else {
+                if (this.Current.timeVantagem == '1' && this.Current.goleiroTime2) {
+                    this.Current.goleiroTime1 = this.Current.goleiroTime2;
+                    this.Current.goleiroTime2 = null;
+                }
+                else {
+                    this.Current.goleiroTime1 = null;
+                }
+            }
+            found = true;
+        }
+        if (!found && this.Current.goleiroTime2 && this.Current.goleiroTime2.id == playerID) {
+            if (this.pegarProximoGoleiro(false)) {
+                this.Current.goleiroTime2 = this.pegarProximoGoleiro(true);
+            }
+            else {
+                if (this.Current.timeVantagem == '2' && this.Current.goleiroTime1) {
+                    this.Current.goleiroTime2 = this.Current.goleiroTime1;
+                    this.Current.goleiroTime1 = null;
+                }
+                else {
+                    this.Current.goleiroTime2 = null;
+                }
+            }
+            found = true;
+        }
+        if (!found) {
+            for (var i in this.Current.time1) {
+                if (this.Current.time1[i].id == playerID) {
+                    this.Current.time1.splice(+i, 1);
+                    found = true;
+                    break; //Stop this loop, we found it!
+                }
+            }
+        }
+        if (!found) {
+            for (var i in this.Current.time2) {
+                if (this.Current.time2[i].id == playerID) {
+                    this.Current.time2.splice(+i, 1);
+                    found = true;
+                    break; //Stop this loop, we found it!
+                }
+            }
+        }
+        this.time1Goals = this.Current.time1Goals();
+        this.time2Goals = this.Current.time2Goals();
+        this.preencherTimesComProximos();
     }
 
     pegarProximoJogador(remove) {
