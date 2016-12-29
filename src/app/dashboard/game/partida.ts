@@ -13,6 +13,16 @@
         this.timeVantagem = 1;
     }
 
+    pegaLinhas() {
+        if (this.time1.length > this.time2.length) {
+            return this.time1.length;
+        }
+        if (this.time2.length > this.time1.length) {
+            return this.time2.length;
+        }
+        return this.time1.length;
+    }
+
     time1Goals() {
         var total = 0;
         for (var i in this.time1) {
@@ -46,6 +56,31 @@
         }
         return total;
     }
+
+    clone() {
+        var newPartida = new Partida();
+        newPartida.numDeJog = this.numDeJog;
+        newPartida.emAndamento = this.emAndamento;
+        newPartida.timeVantagem = this.timeVantagem;
+        if (this.goleiroTime1) {
+            newPartida.goleiroTime1 = this.goleiroTime1.clone();
+        }
+        if (this.goleiroTime2) {
+            newPartida.goleiroTime2 = this.goleiroTime2.clone();
+        }
+        newPartida.time1 = this.cloneList(this.time1);
+        newPartida.time2 = this.cloneList(this.time2);
+        newPartida.proximas = this.cloneList(this.proximas);
+        return newPartida;
+    }
+
+    cloneList(lstToClone) {
+        var retList = new Array<Jogador>();
+        for (var i in lstToClone) {
+            retList.push(lstToClone[i].clone());
+        }
+        return retList;
+    }
 }
 
 export class Jogador {
@@ -56,8 +91,23 @@ export class Jogador {
     public assistencias: number;
     public goleiro: boolean;
 
-    constructor() {
-        
+    constructor(id?: number, name?: string, goleiro?: boolean) {
+        this.id = id;
+        this.name = name;
+        this.goleiro = goleiro;
+        this.gols = 0;
+        this.golsContra = 0;
+        this.assistencias = 0;
     }
 
+    clone() {
+        var newJogador = new Jogador();
+        newJogador.id = this.id;
+        newJogador.name = this.name;
+        newJogador.gols = this.gols;
+        newJogador.golsContra = this.golsContra;
+        newJogador.assistencias = this.assistencias;
+        newJogador.goleiro = this.goleiro;
+        return newJogador;
+    }
 }

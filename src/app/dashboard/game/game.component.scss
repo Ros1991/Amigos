@@ -19,6 +19,38 @@
 
 .tblStrech{
     width:100%;
+    margin: 10px;
+}
+
+.same-width-td
+{
+    width:25%;
+    color:#fff;
+}
+
+.padding-right-5
+{
+    padding-right:5px;
+}
+
+.border-1
+{
+    border:1px solid #e5e5e5;
+}
+.border-right-1
+{
+    border-right:1px solid #e5e5e5;
+}
+
+.padding-left-5
+{
+    padding-left:5px;
+}
+
+.padding-5
+{
+    padding-left:5px;
+    padding-right:5px;
 }
 
 .player-options
@@ -44,10 +76,43 @@ div.expand div.player-options {
     float:right;
 }
 
+.img-detail-mini{
+    width:16px;
+    height:16px;
+    margin-left:2px;
+    float:right;
+    vertical-align:central;
+    margin-top:3px;
+}
+
+.margin-up
+{
+    margin-top:-2px;
+}
+
+.img-detail-mini-left{
+    width:16px;
+    height:16px;
+    margin-right:2px;
+    float:left;
+    vertical-align:central;
+    margin-top:3px;
+}
+
 .img-detail-goalkeeper
 {
     width:20px;
     height:20px;
+}
+
+.img-detail-goalkeeper-mini
+{
+    width:16px;
+    height:16px;
+}
+
+.tr-goalkeeper{
+    border:1px solid #e5e5e5;
 }
 
 .team-yellow{
