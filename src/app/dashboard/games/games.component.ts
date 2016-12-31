@@ -1,35 +1,38 @@
 import { Component } from '@angular/core';
-import './owlCarousel/owl.carousel.min.js';
-
 
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
-  styleUrls: ['./games.component.scss', './owlCarousel/docs.theme.min.css','./owlCarousel/owl.carousel.min.css', './owlCarousel/owl.theme.default.css']
+  styleUrls: ['./games.component.scss']
 })
 
 export class GamesComponent {
-    constructor() {
+    public myInterval: number = 5000;
+    public noWrapSlides: boolean = false;
+    public slides: any[] = [];
+    public activeSlideIndex: number;
+
+    public constructor() {
+        for (let i = 0; i < 4; i++) {
+            this.addSlide();
+        }
     }
 
-    ngOnInit() {
-        $(document).ready(function () {
-            $('.owl-carousel').owlCarousel({
-                loop: true,
-                margin: 10,
-                nav: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 5
-                    }
-                }
-            })
+    public addSlide(): void {
+        let newWidth = 600 + this.slides.length + 1;
+        this.slides.push({
+            image: `//placekitten.com/${newWidth}/300`,
+            text: `${['More', 'Extra', 'Lots of', 'Surplus'][this.slides.length % 4]}
+      ${['Cats', 'Kittys', 'Felines', 'Cutes'][this.slides.length % 4]}`
         });
+    }
+
+    public selectSlide(index: number): void {
+        this.activeSlideIndex = index;
+    }
+
+    public removeSlide(index?: number): void {
+        const toRemove = index ? index : this.activeSlideIndex;
+        this.slides.splice(toRemove, 1);
     }
 }
