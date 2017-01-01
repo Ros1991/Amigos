@@ -16,7 +16,7 @@
                 <li>
                     <a [routerLink]="['home']">
                         <i class="fa fa-home"></i>
-                        <span>&nbsp; Dashboard</span>
+                        <span>&nbsp; Home</span>
                     </a>
                 </li>
                 <li>
@@ -26,134 +26,130 @@
                     </a>
                 </li>
                 <li>
+                    <a [routerLink]="['games']">
+                        <i class="fa fa-calendar"></i>
+                        <span>&nbsp; Peladas</span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['games']">
+                        <i class="fa fa-line-chart"></i>
+                        <span>&nbsp; Ranking</span>
+                    </a>
+                </li>
+
+
+                <li>
                     <a [routerLink]="['game']">
                         <i class="fa fa-support"></i>
                         <span>&nbsp; Nova pelada</span>
                     </a>
                 </li>
 
-                <li>
-                    <a [routerLink]="['games']">
-                        <i class="fa fa-calendar"></i>
-                        <span>&nbsp; Peladas</span>
-                    </a>
-                </li>
+                
 
-                <li>
-                    <a [routerLink]="['typography']">
-                        <i class="fa fa-text-width"></i>
-                        <span>&nbsp; Typography</span>
-                    </a>
-                </li>
-                <li>
-                    <a [routerLink]="['grid']">
-                        <i class="fa fa-th-large"></i>
-                        <span>&nbsp; Grid</span>
-                    </a>
-                </li>
                 <li class="nested" [class.expand]="showMenu === 'tables'">
-                    <a (click)="addExpandClass('tables')"><i class="fa fa-list"></i><span>&nbsp;&nbsp; Tables</span></a>
+                    <a (click)="addExpandClass('tables')"><i class="fa fa-list"></i><span>&nbsp;&nbsp; Modelos</span></a>
                     <ul class="submenu">
                         <li>
-                            <a [routerLink]="['table', 'bootstrap-table']"><span>Bootstrap Tables</span></a>
+                            <a [routerLink]="['typography']">
+                                <i class="fa fa-text-width"></i>
+                                <span>&nbsp; Typography</span>
+                            </a>
                         </li>
                         <li>
-                            <a [routerLink]="['table', 'data-table']"><span>Data Tables</span></a>
+                            <a [routerLink]="['grid']">
+                                <i class="fa fa-th-large"></i>
+                                <span>&nbsp; Grid</span>
+                            </a>
                         </li>
-                    </ul>
-                </li>
-                <li class="nested" [class.expand]="showMenu === 'forms'">
-                    <a (click)="addExpandClass('forms')"><i class="fa fa-yelp"></i><span>&nbsp;&nbsp; Form</span></a>
-                    <ul class="submenu">
-                        <li>
-                            <a [routerLink]="['form', 'elements']"><span>Elements</span></a>
+                        <li class="nested" [class.expand]="showMenu === 'tables'">
+                            <a (click)="addExpandClass('tables')"><i class="fa fa-list"></i><span>&nbsp;&nbsp; Tables</span></a>
+                            <ul class="submenu">
+                                <li>
+                                    <a [routerLink]="['table', 'bootstrap-table']"><span>Bootstrap Tables</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['table', 'data-table']"><span>Data Tables</span></a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a [routerLink]="['form', 'components']"><span>Components</span></a>
+                        <li class="nested" [class.expand]="showMenu === 'tables'">
+                            <a (click)="addExpandClass('forms')"><i class="fa fa-yelp"></i><span>&nbsp;&nbsp; Form</span></a>
+                            <ul class="submenu">
+                                <li>
+                                    <a [routerLink]="['form', 'elements']"><span>Elements</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['form', 'components']"><span>Components</span></a>
+                                </li>
+                            </ul>
                         </li>
-                    </ul>
-                </li>
-                <li class="nested" [class.expand]="showMenu === 'interface'">
-                    <a (click)="addExpandClass('interface')"><i class="fa fa-cloud-download"></i><span>&nbsp;&nbsp; USER INTERFACE</span></a>
-                    <ul class="submenu">
-                        <li>
-                            <a [routerLink]="['ui-element', 'buttons']"><span>Buttons</span></a>
+                        <li class="nested" [class.expand]="showMenu === 'tables'">
+                            <a (click)="addExpandClass('interface')"><i class="fa fa-cloud-download"></i><span>&nbsp;&nbsp; USER INTERFACE</span></a>
+                            <ul class="submenu">
+                                <li>
+                                    <a [routerLink]="['ui-element', 'buttons']"><span>Buttons</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['ui-element', 'dropdown']"><span>Dropdowns</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['ui-element', 'icons']"><span>Icons</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['ui-element', 'cards']"><span>Card</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['ui-element', 'alert']"><span>Alert</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['ui-element', 'progressbar']"><span>Progressbar</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['ui-element', 'pagination']"><span>Pagination</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['ui-element', 'others']"><span>Other Element</span></a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a [routerLink]="['ui-element', 'dropdown']"><span>Dropdowns</span></a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['ui-element', 'icons']"><span>Icons</span></a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['ui-element', 'cards']"><span>Card</span></a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['ui-element', 'alert']"><span>Alert</span></a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['ui-element', 'progressbar']"><span>Progressbar</span></a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['ui-element', 'pagination']"><span>Pagination</span></a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['ui-element', 'others']"><span>Other Element</span></a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li class="nested" [class.expand]="showMenu === 'charts'">
-                    <a (click)="addExpandClass('charts')"><i class="fa fa-line-chart"></i><span>&nbsp;&nbsp; Charts</span></a>
-                    <ul class="submenu">
-                        <li>
-                            <a [routerLink]="['charts', 'chart-js']"><span>ChartJs</span></a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['charts', 'c3-chart']"><span>C3Chart</span></a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a [routerLink]="['calendar']">
-                        <i class="fa fa-calendar"></i>
-                        <span>&nbsp; Calender</span>
-                    </a>
-                </li>
 
-                <li class="nested" [class.expand]="showMenu === 'mails'">
-                    <a (click)="addExpandClass('mails')"><i class="fa fa-envelope-o"></i><span>&nbsp;&nbsp; Mail</span></a>
-                    <ul class="submenu">
-                        <li>
-                            <a [routerLink]="['mail', 'inbox']"><span>Inbox</span></a>
+                        <li class="nested" [class.expand]="showMenu === 'tables'">
+                            <a (click)="addExpandClass('charts')"><i class="fa fa-line-chart"></i><span>&nbsp;&nbsp; Charts</span></a>
+                            <ul class="submenu">
+                                <li>
+                                    <a [routerLink]="['charts', 'chart-js']"><span>ChartJs</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['charts', 'c3-chart']"><span>C3Chart</span></a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a [routerLink]="['mail', 'compose']"><span>Compose</span></a>
+                            <a [routerLink]="['calendar']">
+                                <i class="fa fa-calendar"></i>
+                                <span>&nbsp; Calender</span>
+                            </a>
                         </li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <a [routerLink]="['invoice']">
-                        <i class="fa fa-list-alt"></i>
-                        <span>&nbsp; Invoice</span>
-                    </a>
-                </li>
 
-                <li class="nested" [class.expand]="showMenu === 'pages'">
-                    <a (click)="addExpandClass('pages')"><i class="fa fa-file"></i><span>&nbsp;&nbsp; Pages</span></a>
-                    <ul class="submenu">
-                        <li>
-                            <a [routerLink]="['blank-page']"><span>Blank Page</span></a>
+                        <li class="nested" [class.expand]="showMenu === 'tables'">
+                            <a (click)="addExpandClass('mails')"><i class="fa fa-envelope-o"></i><span>&nbsp;&nbsp; Mail</span></a>
+                            <ul class="submenu">
+                                <li>
+                                    <a [routerLink]="['mail', 'inbox']"><span>Inbox</span></a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['mail', 'compose']"><span>Compose</span></a>
+                                </li>
+                            </ul>
                         </li>
+
                         <li>
-                            <a [routerLink]="['']"><span>Login</span></a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['', 'signup']"><span>Signup</span></a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['', '404-page']"><span>404 Page</span></a>
+                            <a [routerLink]="['invoice']">
+                                <i class="fa fa-list-alt"></i>
+                                <span>&nbsp; Invoice</span>
+                            </a>
                         </li>
                     </ul>
                 </li>
