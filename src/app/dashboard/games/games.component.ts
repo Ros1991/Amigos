@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./games.component.scss']
 })
 
+    //https://github.com/angular/material2/blob/master/guides/theming.md
+
 export class GamesComponent {
     public myInterval: number = 5000;
     public noWrapSlides: boolean = false;
