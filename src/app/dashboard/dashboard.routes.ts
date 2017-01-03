@@ -21,6 +21,7 @@ const dashboardRoutes: Route[] = [
             { path: 'players', loadChildren: 'app/dashboard/players/players.module' },
             { path: 'players/edit/:id', loadChildren: 'app/dashboard/players/form/players-form.module' },
             { path: 'players/new', loadChildren: 'app/dashboard/players/form/players-form.module' },
+            { path: 'players/:allowEdit', loadChildren: 'app/dashboard/players/players.module' },
 
             { path: 'game', loadChildren: 'app/dashboard/game/game.module' },
             { path: 'games', loadChildren: 'app/dashboard/games/games.module' }

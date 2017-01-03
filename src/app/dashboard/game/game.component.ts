@@ -6,8 +6,7 @@ import { Jogador } from './partida';
 @Component({
     selector: 'app-game',
     templateUrl: './game.component.html',
-    styleUrls: ['./game.component.scss', './dragula.min.css',
-        './dragula.css']
+    styleUrls: ['./game.component.scss']
 })
 
 

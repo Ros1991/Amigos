@@ -1,6 +1,6 @@
 <div class="animate">
     <div class="container-fluid">
-        <button type="button" class="btn btn-primary btn-circle btn-lg btn-fixed-right-bottom" [routerLink]="['new']"><i class="fa fa-plus"></i></button>
+        <button type="button" *ngIf="allowEdit" class="btn btn-primary btn-circle btn-lg btn-fixed-right-bottom" [routerLink]="['../../new']"><i class="fa fa-plus"></i></button>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -10,59 +10,21 @@
                         </h5>
                     </div>
                     <div class="card-block">
-                        <div class="row">
-                            <div class="col-lg-4">
+                        <div *ngIf="mensalistas && mensalistas.length > 0" class="row">
+                            <div *ngFor='let item of mensalistas' class="col-lg-4">
                                 <div class="col player-card">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <img class="img-responsive" ng-src="assets/images/staff-1.jpg" alt="" src="assets/images/staff-1.jpg">
+                                        <img class="img-responsive" alt="" src="{{item.Picture}}">
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                        <span class="team-member-edit"><a [routerLink]="['edit/1']"><i class="fa fa-pencil"></i></a></span>
-                                        <h4 class="margin-top-0 margin-bottom-10 text-primary"><a ui-sref="app.uni-staff-profile" class="ng-binding" href="#/app/university/staff-profile">Edu</a></h4>
+                                        <span *ngIf="allowEdit" class="team-member-edit"><a [routerLink]="['../../edit', item.Id]"><i class="fa fa-pencil"></i></a></span>
+                                        <h4 class="margin-top-0 margin-bottom-10 text-primary"><a ui-sref="app.uni-staff-profile" class="ng-binding" href="#/app/university/staff-profile">{{item.NickName}}</a></h4>
                                         <span class="ng-binding">
-                                            Eduardo Martins<br>
-                                            Meio campista<br>
-                                            <small>Idade:</small> 33 anos<br>
-                                            <small>Telefone:</small> (61) 99207-4540<br>
-                                            <small>Email:</small> email@example.com
-                                        </span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="col player-card">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <img class="img-responsive" ng-src="assets/images/staff-2.jpg" alt="" src="assets/images/staff-2.jpg">
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                        <span class="team-member-edit"><a [routerLink]="['edit/2']"><i class="fa fa-pencil"></i></a></span>
-                                        <h4 class="margin-top-0 margin-bottom-10 text-primary"><a ui-sref="app.uni-staff-profile" class="ng-binding" href="#/app/university/staff-profile">Porco</a></h4>
-                                        <span class="ng-binding">
-                                            Rodrigo Silva<br>
-                                            Zagueiro<br>
-                                            <small>Idade:</small> 25 anos<br>
-                                            <small>Telefone:</small> (61) 99228-0897<br>
-                                            <small>Email:</small> email@example.com
-                                        </span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="col player-card">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <img class="img-responsive" ng-src="assets/images/staff-3.jpg" alt="" src="assets/images/staff-3.jpg">
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                        <span class="team-member-edit"><a [routerLink]="['edit/3']"><i class="fa fa-pencil"></i></a></span>
-                                        <h4 class="margin-top-0 margin-bottom-10 text-primary"><a ui-sref="app.uni-staff-profile" class="ng-binding" href="#/app/university/staff-profile">Acival</a></h4>
-                                        <span class="ng-binding">
-                                            Acival Monteiro<br>
-                                            Atacante<br>
-                                            <small>Idade:</small> 40 anos<br>
-                                            <small>Telefone:</small> (61) 99207-4540<br>
-                                            <small>Email:</small> email@example.com
+                                            <span *ngIf="item.Name && item.Name != ''">{{item.Name}}<br></span>
+                                            <span *ngIf="item.Position && item.Position != ''">{{getPosition(item.Position)}}<br></span>
+                                            <span *ngIf="item.BirthdayDate && getAge(item.BirthdayDate) < 1000"><small>Idade:</small> {{getAge(item.BirthdayDate)}} Anos<br></span>
+                                            <span *ngIf="item.Phone && item.Phone != ''"><small>Telefone:</small> {{item.Phone}}<br></span>
+                                            <span *ngIf="item.Email && item.Email != ''"><small>Email:</small> {{item.Email}}</span>
                                         </span>
                                         <div class="clearfix"></div>
                                     </div>
@@ -81,59 +43,21 @@
                         </h5>
                     </div>
                     <div class="card-block">
-                        <div class="row">
-                            <div class="col-lg-6">
+                        <div *ngIf="convidados && convidados.length > 0" class="row">
+                            <div *ngFor='let item of convidados' class="col-lg-4">
                                 <div class="col player-card">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <img class="img-responsive" ng-src="assets/images/convidados-1.jpg" alt="" src="assets/images/convidados-1.jpg">
+                                        <img class="img-responsive" alt="" src="{{item.Picture}}">
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                        <span class="team-member-edit"><a [routerLink]="['edit/4']"><i class="fa fa-pencil"></i></a></span>
-                                        <h4 class="margin-top-0 margin-bottom-10 text-primary"><a ui-sref="app.uni-staff-profile" class="ng-binding" href="#/app/university/staff-profile">Wellington</a></h4>
+                                        <span *ngIf="allowEdit" class="team-member-edit"><a [routerLink]="['../../edit', item.Id]"><i class="fa fa-pencil"></i></a></span>
+                                        <h4 class="margin-top-0 margin-bottom-10 text-primary"><a ui-sref="app.uni-staff-profile" class="ng-binding" href="#/app/university/staff-profile">{{item.NickName}}</a></h4>
                                         <span class="ng-binding">
-                                            Wellington Rodrigues<br>
-                                            Zagueiro<br>
-                                            <small>Idade:</small> 39 anos<br>
-                                            <small>Telefone:</small> (61) 99207-4540<br>
-                                            <small>Email:</small> email@example.com
-                                        </span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="col player-card">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <img class="img-responsive" ng-src="assets/images/convidados-2.jpg" alt="" src="assets/images/convidados-2.jpg">
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                        <span class="team-member-edit"><a [routerLink]="['edit/5']"><i class="fa fa-pencil"></i></a></span>
-                                        <h4 class="margin-top-0 margin-bottom-10 text-primary"><a ui-sref="app.uni-staff-profile" class="ng-binding" href="#/app/university/staff-profile">Cordeiro</a></h4>
-                                        <span class="ng-binding">
-                                            Guilherme Fernandes<br>
-                                            Atacante<br>
-                                            <small>Idade:</small> 27 anos<br>
-                                            <small>Telefone:</small> (61) 99228-0897<br>
-                                            <small>Email:</small> email@example.com
-                                        </span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="col player-card">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <img class="img-responsive" ng-src="assets/images/convidados-3.jpg" alt="" src="assets/images/convidados-3.jpg">
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                        <span class="team-member-edit"><a [routerLink]="['edit/6']"><i class="fa fa-pencil"></i></a></span>
-                                        <h4 class="margin-top-0 margin-bottom-10 text-primary"><a ui-sref="app.uni-staff-profile" class="ng-binding" href="#/app/university/staff-profile">Carvalho</a></h4>
-                                        <span class="ng-binding">
-                                            Felipe Carvalho<br>
-                                            Zagueiro<br>
-                                            <small>Idade:</small> 26 anos<br>
-                                            <small>Telefone:</small> (61) 99207-4540<br>
-                                            <small>Email:</small> email@example.com
+                                            <span *ngIf="item.Name && item.Name != ''">{{item.Name}}<br></span>
+                                            <span *ngIf="item.Position && item.Position != ''">{{getPosition(item.Position)}}<br></span>
+                                            <span *ngIf="item.BirthdayDate && getAge(item.BirthdayDate) < 1000"><small>Idade:</small> {{getAge(item.BirthdayDate)}} Anos<br></span>
+                                            <span *ngIf="item.Phone && item.Phone != ''"><small>Telefone:</small> {{item.Phone}}<br></span>
+                                            <span *ngIf="item.Email && item.Email != ''"><small>Email:</small> {{item.Email}}</span>
                                         </span>
                                         <div class="clearfix"></div>
                                     </div>
