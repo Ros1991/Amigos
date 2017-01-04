@@ -1,4 +1,11 @@
-﻿export class Partida {
+﻿export class JogoFinalizadoToSave {
+    public jogosFinalizados: Array<Partida>;
+    public gameDate: string;
+    public id: number;
+}
+
+
+export class Partida {
     public time1: Array<Jogador>;
     public time2: Array<Jogador>;
     public numDeJog: number;

@@ -1,7 +1,121 @@
-.xxxxxxxx
+.pull-right-fix-header
 {
-    .md-tab-label
-        {
-    height:100px !important;
-    }
+    position:absolute;
+    right:8px;
+    top:8px;
+}
+
+.tblStrech{
+    width:100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.same-width-td
+{
+    width:50%;
+}
+
+.header-text-white
+{
+    color:#fff;
+}
+
+.padding-right-5
+{
+    padding-right:5px;
+}
+
+.border-1
+{
+    border:1px solid #e5e5e5;
+}
+.border-right-1
+{
+    border-right:1px solid #e5e5e5;
+}
+
+.padding-left-5
+{
+    padding-left:5px;
+}
+
+.padding-5
+{
+    padding-left:5px;
+    padding-right:5px;
+}
+
+.player-options
+{
+    border-top:0px;
+    display:none;
+}
+
+.remove-margim
+{
+    margin:0px;
+}
+
+div.expand div.player-options {
+    display:block !important;
+}
+
+.img-detail
+{
+    width:20px;
+    height:20px;
+    margin-left:5px;
+    float:right;
+}
+
+.img-detail-mini{
+    width:16px;
+    height:16px;
+    margin-left:2px;
+    float:right;
+    vertical-align:central;
+    margin-top:3px;
+}
+
+.margin-up
+{
+    margin-top:-2px;
+}
+.margin-up-1
+{
+    margin-top:-1px;
+}
+
+.img-detail-mini-left{
+    width:16px;
+    height:16px;
+    margin-right:2px;
+    float:left;
+    vertical-align:central;
+    margin-top:3px;
+}
+
+.img-detail-goalkeeper
+{
+    width:20px;
+    height:20px;
+}
+
+.img-detail-goalkeeper-mini
+{
+    width:16px;
+    height:16px;
+}
+
+.tr-goalkeeper{
+    border:1px solid #e5e5e5;
+}
+
+.team-yellow{
+    color: #f0ad4e;
+}
+
+.team-blue{
+    color: #2A4690;
 }

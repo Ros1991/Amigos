@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
-import { Partida } from './partida';
-import { Jogador } from './partida';
+import { Partida, Jogador, JogoFinalizadoToSave } from './partida';
+
+import {Http, Response, Headers} from "@angular/http";
+
+import { Player } from '../players/player';
+import 'rxjs/add/operator/toPromise';
+
 
 @Component({
     selector: 'app-game',
@@ -9,80 +14,83 @@ import { Jogador } from './partida';
     styleUrls: ['./game.component.scss']
 })
 
-
-
 export class GameComponent {
 
-
-    public ordemDeChegada: Array<any> = [
-
-    ];
+    private headers = new Headers({ 'Content-Type': 'application/json' });
+    public ordemDeChegada: Array<any> = [];
     public proximos: Array<Jogador>;
     public jogosFinalizados: Array<Partida>;
     newPlayer: any;
+    newPlayerToList: any;
     Current: Partida;
     showMenu: string = '';
+    gameDate: string = '';
     countAssistent: Function = Array;
     desmarcarClick: boolean;
     time1Goals: number;
     time2Goals: number;
     isGoalkeeper: boolean;
-
+    isGoalkeeperToList: boolean;
+    public playersList: Array<Player>;
     confNumberPlayers: number;
     confPrimeiraDuasPartidas: boolean;
     confShow: boolean;
 
-    createFake() {
-        //this.newPlayer = 'Acival';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Wilker';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Marcelo R';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Marcelao';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Filipe S';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Paulao';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Felipe P';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Antonio';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Cordeiro';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Vassoler';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Klayton';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Leo A';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Marcelo M';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Diego';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Paulinho';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Drogbar';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Tiago';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Vinicius';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Marcus';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Felipe M';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Amilton';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Leo B';
-        //this.addPlayerToOrder();
-        //this.newPlayer = 'Rochinha';
-        //this.addPlayerToOrder();
+    addPlayerToDb() {
+        if (this.newPlayer && this.newPlayer != '') {
+            let p = new Player();
+            p.NickName = this.newPlayer;
+            if (this.isGoalkeeper) {
+                p.Position = "g";
+            }
+            this.http.post('http://localhost:65248/api/Players', p, { headers: this.headers })
+                .toPromise()
+                .then(res => this.refreshPlayers());
+            this.newPlayer = '';
+            this.isGoalkeeper = false;
+        }
     }
 
+    salvarJogo() {
+        if (this.jogosFinalizados.length > 0 && this.gameDate != '') {
+            let finished = new JogoFinalizadoToSave();
+            finished.jogosFinalizados = this.jogosFinalizados;
+            finished.gameDate = this.gameDate;
 
-    constructor(private dragulaService: DragulaService) {
+            this.http.post('http://localhost:65248/api/Games', finished, { headers: this.headers })
+                .toPromise()
+                .then(res => this.refreshPlayers());
+        }
+    }
+
+    refreshPlayers() {
+        this.http.get('http://localhost:65248/api/Players').map((res: Response) => res.json())
+            .subscribe((items: Array<Player>) => {
+                this.playersList = new Array<Player>();
+                let jogadores = items;
+                for (let plr in jogadores) {
+                    if (jogadores[plr].Subscriber) {
+                        this.playersList.unshift(jogadores[plr]);
+                    }
+                    else {
+                        this.playersList.push(jogadores[plr]);
+                    }
+                }
+            });
+
+    }
+
+    onPlayerChange(event) {
+        for (let plr in this.playersList) {
+            if (+this.newPlayerToList == this.playersList[plr].Id) {
+                this.isGoalkeeperToList = this.playersList[plr].Position.toLowerCase() == "g";
+                break;
+            }
+                
+        }
+    }
+
+    constructor(private dragulaService: DragulaService, private http: Http) {
         dragulaService.setOptions('first-bag', {
             removeOnSpill: true
         });
@@ -105,7 +113,21 @@ export class GameComponent {
         this.Current.time1 = [];
         this.Current.time2 = [];
         this.Current.timeVantagem = '1';
-        this.createFake();
+        this.playersList = new Array<Player>();
+
+
+        this.http.get('http://localhost:65248/api/Players').map((res: Response) => res.json())
+            .subscribe((items: Array<Player>) => {
+                let jogadores = items;
+                for (let plr in jogadores) {
+                    if (jogadores[plr].Subscriber) {
+                        this.playersList.unshift(jogadores[plr]);
+                    }
+                    else {
+                        this.playersList.push(jogadores[plr]);
+                    }
+                }
+            });
     }
 
     remontarTimes() {
@@ -422,12 +444,21 @@ export class GameComponent {
     }
 
     addPlayerToOrder() {
-        if (this.newPlayer && this.newPlayer != '') {
-            var newId = Math.floor(Math.random() * 100000000) + 1;
-            this.ordemDeChegada.push({ id: newId, name: this.newPlayer, goleiro: this.isGoalkeeper });
-            this.addPlayerToGame(newId, this.newPlayer, this.isGoalkeeper);
-            this.newPlayer = '';
-            this.isGoalkeeper = false;
+        if (this.newPlayerToList && this.newPlayerToList != '') {
+            var newId = +this.newPlayerToList;
+            var name = "";
+            for (let plr in this.playersList) {
+                if (newId == this.playersList[plr].Id) {
+                    name = this.playersList[plr].NickName;
+                    break;
+                }
+
+            }
+
+            this.ordemDeChegada.push({ id: newId, name: name, goleiro: this.isGoalkeeperToList });
+            this.addPlayerToGame(newId, name, this.isGoalkeeperToList);
+            this.newPlayerToList = '';
+            this.isGoalkeeperToList = false;
         }
     }
 

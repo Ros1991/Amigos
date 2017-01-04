@@ -17,9 +17,20 @@
                     </div>
                     <div class="card-block">
                         <input type="text" name="nameInput" [(ngModel)]="newPlayer">
-                        <button type="button" class="pull-right-fix btn btn-success btn-circle btn-sm" (click)="addPlayerToOrder()"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="pull-right-fix btn btn-success btn-circle btn-sm" (click)="addPlayerToDb()"><i class="fa fa-plus"></i></button>
                         <label class="checkbox1">
                             <input name="goleiroChk" type="checkbox" [(ngModel)]="isGoalkeeper">
+                            <span class="remove-margim"></span>
+                            <img src="assets/images/goleiro.png" class="img-detail-goalkeeper" />
+                        </label>
+                    </div>
+                    <div class="card-block">
+                        <select class="form-control" name="newPlayerToListSelect" [(ngModel)]="newPlayerToList" (change)="onPlayerChange($event)">
+                            <option *ngFor='let item of playersList' value="{{item.Id}}">{{item.NickName}}</option>
+                        </select>
+                        <button type="button" class="pull-right-fix-2 btn btn-success btn-circle btn-sm" (click)="addPlayerToOrder()"><i class="fa fa-plus"></i></button>
+                        <label class="checkbox1">
+                            <input name="goleiroChk" type="checkbox" [(ngModel)]="isGoalkeeperToList">
                             <span class="remove-margim"></span>
                             <img src="assets/images/goleiro.png" class="img-detail-goalkeeper" />
                         </label>
@@ -53,6 +64,13 @@
                                                     <label>Numero de jogadores</label>
                                                     <input type="email" class="form-control" name="confNumberPlayersInput" [(ngModel)]="confNumberPlayers">
                                                     <button type="button" (click)="applyConfig()" class="btn btn-success">Aplicar agora</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Data do jogo</label>
+                                                    <input type="email" class="form-control" name="confNumberPlayersInput" [(ngModel)]="gameDate">
+                                                    <button type="button" (click)="salvarJogo()" class="btn btn-success">Salvar Partida</button>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">

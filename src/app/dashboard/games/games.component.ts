@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import { Partida, Jogador, JogoFinalizadoToSave } from '../game/partida';
+
+import {Http, Response, Headers} from "@angular/http";
+
+import { Player } from '../players/player';
+import 'rxjs/add/operator/toPromise';
+
 
 @Component({
   selector: 'app-games',
@@ -6,35 +13,31 @@ import { Component } from '@angular/core';
   styleUrls: ['./games.component.scss']
 })
 
-    //https://github.com/angular/material2/blob/master/guides/theming.md
+
 
 export class GamesComponent {
-    public myInterval: number = 5000;
-    public noWrapSlides: boolean = false;
-    public slides: any[] = [];
-    public activeSlideIndex: number;
+    public jogos: Array<JogoFinalizadoToSave>;
+    countAssistent: Function = Array;
 
-    public constructor() {
-        for (let i = 0; i < 4; i++) {
-            this.addSlide();
-        }
+    public constructor(private http: Http) {
     }
 
-    public addSlide(): void {
-        let newWidth = 600 + this.slides.length + 1;
-        this.slides.push({
-            image: `//placekitten.com/${newWidth}/300`,
-            text: `${['More', 'Extra', 'Lots of', 'Surplus'][this.slides.length % 4]}
-      ${['Cats', 'Kittys', 'Felines', 'Cutes'][this.slides.length % 4]}`
-        });
+    ngOnInit() {
+        this.jogos = new Array<JogoFinalizadoToSave>();
+        this.http.get('http://localhost:65248/api/Games').map((res: Response) => res.json())
+            .subscribe((items: Array<JogoFinalizadoToSave>) => {
+                this.jogos = items;
+            });
     }
 
-    public selectSlide(index: number): void {
-        this.activeSlideIndex = index;
+    pegaLinhas(item) {
+        return 6;
     }
 
-    public removeSlide(index?: number): void {
-        const toRemove = index ? index : this.activeSlideIndex;
-        this.slides.splice(toRemove, 1);
+    time1Goals(item) {
+        return 2;
+    }
+    time2Goals(item) {
+        return 1;
     }
 }

@@ -349,15 +349,15 @@
 	}
 	.hidd {
 		.dropdown {
-			a {
-				img {
-					cursor: pointer;
+            img {
 					width: 35px;
 					margin: 8px 15px 0px 0px;
 				}
 				&:after {
 					display: none;
 				}
+			a {
+				
 			}
 			.dropdown-menu {
 				left: auto;
