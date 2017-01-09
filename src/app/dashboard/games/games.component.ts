@@ -31,13 +31,45 @@ export class GamesComponent {
     }
 
     pegaLinhas(item) {
-        return 6;
+        if (item.time1.length > item.time2.length) {
+            return item.time1.length;
+        }
+        if (item.time2.length > item.time1.length) {
+            return item.time2.length;
+        }
+        return item.time1.length;
     }
 
     time1Goals(item) {
-        return 2;
+        var total = 0;
+        for (var i in item.time1) {
+            total = total + item.time1[i].gols;
+        }
+        for (var i in item.time2) {
+            total = total + item.time2[i].golsContra;
+        }
+        if (item.goleiroTime1) {
+            total = total + item.goleiroTime1.gols;
+        }
+        if (item.goleiroTime2) {
+            total = total + item.goleiroTime2.golsContra;
+        }
+        return total;
     }
     time2Goals(item) {
-        return 1;
+        var total = 0;
+        for (var i in item.time2) {
+            total = total + item.time2[i].gols;
+        }
+        for (var i in item.time1) {
+            total = total + item.time1[i].golsContra;
+        }
+        if (item.goleiroTime1) {
+            total = total + item.goleiroTime1.golsContra;
+        }
+        if (item.goleiroTime2) {
+            total = total + item.goleiroTime2.gols;
+        }
+        return total;
     }
 }

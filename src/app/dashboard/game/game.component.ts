@@ -59,7 +59,7 @@ export class GameComponent {
 
             this.http.post('http://localhost:65248/api/Games', finished, { headers: this.headers })
                 .toPromise()
-                .then(res => this.refreshPlayers());
+                .then(res => alert('deu certo'));
         }
     }
 
@@ -277,7 +277,7 @@ export class GameComponent {
                     novoJogo.time1 = [];
                 } else {
                     if (placar2 == placar1) {
-                        if (this.pegaQtdProximosLinha() > 10) {
+                        if (this.pegaQtdProximosLinha() >= 10) {
                             if (this.Current.timeVantagem == '1') {
                                 this.proximos = this.proximos.concat(this.Current.time1);
                                 if (this.Current.goleiroTime1)

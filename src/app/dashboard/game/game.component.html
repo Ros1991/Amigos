@@ -310,14 +310,14 @@
                                                 <table class="tblStrech border-1">
                                                     <tr>
                                                         <td align="left" class="card-primary padding-left-5 header-text-white">
-                                                            <img *ngIf="item.time1Goals() > item.time2Goals()" src="assets/images/win.png" class="img-detail-goalkeeper margin-up-1" />
+                                                            <img *ngIf="item.time1Goals() > item.time2Goals()" src="assets/images/win.png" class="img-detail-goalkeeper margin-up" />
                                                             Azul
                                                         </td>
                                                         <td align="right" class="card-primary padding-right-5 header-text-white"><b>{{item.time1Goals()}}</b></td>
                                                         <td align="left" class="card-warning padding-left-5 header-text-white"><b>{{item.time2Goals()}}</b></td>
                                                         <td align="right" class="card-warning padding-right-5 header-text-white">
                                                             Amarelo
-                                                            <img *ngIf="item.time1Goals() < item.time2Goals()" src="assets/images/win.png" class="img-detail-goalkeeper margin-up-1" />
+                                                            <img *ngIf="item.time1Goals() < item.time2Goals()" src="assets/images/win.png" class="img-detail-goalkeeper margin-up" />
                                                         </td>
                                                     </tr>
 
