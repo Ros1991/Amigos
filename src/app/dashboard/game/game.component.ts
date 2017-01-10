@@ -11,7 +11,7 @@ import 'rxjs/add/operator/toPromise';
 @Component({
     selector: 'app-game',
     templateUrl: './game.component.html',
-    styleUrls: ['./game.component.scss']
+    styleUrls: ['./game.component.scss', './dragula.min.css', './dragula.css']
 })
 
 export class GameComponent {
