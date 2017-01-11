@@ -24,7 +24,10 @@ const dashboardRoutes: Route[] = [
             { path: 'players/:allowEdit', loadChildren: 'app/dashboard/players/players.module' },
 
             { path: 'game', loadChildren: 'app/dashboard/game/game.module' },
-            { path: 'games', loadChildren: 'app/dashboard/games/games.module' }
+            { path: 'games', loadChildren: 'app/dashboard/games/games.module' },
+            { path: 'games/:year', loadChildren: 'app/dashboard/games/games.module' },
+            { path: 'ranking', loadChildren: 'app/dashboard/games/games.module' },
+            { path: 'ranking/:year', loadChildren: 'app/dashboard/ranking/ranking.module' }
 		]
 	}
 ];

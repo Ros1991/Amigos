@@ -5,85 +5,84 @@
                 <div class="card">
                     <div class="card-inverse card-info card-header">
                         <h5 class="card-inverse card-title">
-                            Ultimas peladas
+                            Jogos de {{year}}
                         </h5>
                     </div>
                     <div class="card-block">
-                        <md-tab-group>
+                        <md-tab-group (selectChange)="selectChange($event)">
                             <md-tab *ngFor='let gameOld of jogos'>
                                 <template md-tab-label>
                                     <b>{{gameOld.gameDate}}</b>
                                 </template>
-                                <div class="row">
-                                    <div class="col-lg-6" *ngFor='let item of gameOld.jogosFinalizados'>
-                                        <table class="tblStrech border-1">
-                                            <tr>
-                                                <td align="left" class="card-primary padding-left-5 header-text-white">
-                                                    <img *ngIf="time1Goals(item) > time2Goals(item)" src="assets/images/win.png" class="img-detail-goalkeeper margin-up-1" />
-                                                    Azul
-                                                </td>
-                                                <td align="right" class="card-primary padding-right-5 header-text-white"><b>{{time1Goals(item)}}</b></td>
-                                                <td align="left" class="card-warning padding-left-5 header-text-white"><b>{{time2Goals(item)}}</b></td>
-                                                <td align="right" class="card-warning padding-right-5 header-text-white">
-                                                    Amarelo
-                                                    <img *ngIf="time1Goals(item) < time2Goals(item)" src="assets/images/win.png" class="img-detail-goalkeeper margin-up-1" />
-                                                </td>
-                                            </tr>
-
-                                            <tr *ngFor="let chieldItem of countAssistent(pegaLinhas(item)); let i = index;">
-                                                <td align="left" colspan="2" class="padding-5 border-right-1 same-width-td">
-                                                    {{item.time1.length > i ? item.time1[i].name:''}}
-                                                    <template [ngIf]="item.time1.length > i">
-                                                        <img *ngFor="let a of countAssistent(item.time1[i].gols)" src="assets/images/gol.png" class="img-detail-mini" />
-                                                        <img *ngFor="let a of countAssistent(item.time1[i].assistencias)" src="assets/images/Assitencia.png" class="img-detail-mini" />
-                                                        <img *ngFor="let a of countAssistent(item.time1[i].golsContra)" src="assets/images/GolContra.png" class="img-detail-mini" />
-                                                    </template>
-                                                </td>
-                                                <td align="right" colspan="2" class="padding-5 same-width-td">
-                                                    <template [ngIf]="item.time2.length > i">
-                                                        <img *ngFor="let a of countAssistent(item.time2[i].gols)" src="assets/images/gol.png" class="img-detail-mini-left" />
-                                                        <img *ngFor="let a of countAssistent(item.time2[i].assistencias)" src="assets/images/Assitencia.png" class="img-detail-mini-left" />
-                                                        <img *ngFor="let a of countAssistent(item.time2[i].golsContra)" src="assets/images/GolContra.png" class="img-detail-mini-left" />
-                                                    </template>
-                                                    {{item.time2.length > i ? item.time2[i].name:''}}
-                                                </td>
-                                            </tr>
-
-                                            <tr *ngIf="item.goleiroTime2 || item.goleiroTime1" class="tr-goalkeeper">
-                                                <td align="left" class="padding-left-5">
-                                                    <template [ngIf]="item.goleiroTime1">
-                                                        <img src="assets/images/goleiro.png" class="img-detail-goalkeeper-mini" />
-                                                        {{item.goleiroTime1.name}}
-                                                    </template>
-                                                </td>
-                                                <td align="right" class="padding-right-5 border-right-1">
-                                                    <template [ngIf]="item.goleiroTime1">
-                                                        <img *ngFor="let a of countAssistent(item.goleiroTime1.gols)" src="assets/images/gol.png" class="img-detail" />
-                                                        <img *ngFor="let a of countAssistent(item.goleiroTime1.assistencias)" src="assets/images/Assitencia.png" class="img-detail" />
-                                                        <img *ngFor="let a of countAssistent(item.goleiroTime1.golsContra)" src="assets/images/GolContra.png" class="img-detail" />
-                                                    </template>
-                                                </td>
-                                                <td align="left" class="padding-left-5">
-                                                    <template [ngIf]="item.goleiroTime2">
-                                                        <img *ngFor="let a of countAssistent(item.goleiroTime2.gols)" src="assets/images/gol.png" class="img-detail" />
-                                                        <img *ngFor="let a of countAssistent(item.goleiroTime2.assistencias)" src="assets/images/Assitencia.png" class="img-detail" />
-                                                        <img *ngFor="let a of countAssistent(item.goleiroTime2.golsContra)" src="assets/images/GolContra.png" class="img-detail" />
-                                                    </template>
-                                                </td>
-                                                <td align="right" class="padding-right-5">
-                                                    <template [ngIf]="item.goleiroTime2">
-                                                        {{item.goleiroTime2.name}}
-                                                        <img src="assets/images/goleiro.png" class="img-detail-goalkeeper-mini" />
-                                                    </template>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-
 
                             </md-tab>
                         </md-tab-group>
+                        <div class="row">
+                            <div class="col-lg-6" *ngFor='let item of selectedGame.jogosFinalizados'>
+                                <table class="tblStrech border-1">
+                                    <tr>
+                                        <td align="left" class="card-primary padding-left-5 header-text-white">
+                                            <img *ngIf="time1Goals(item) > time2Goals(item)" src="assets/images/win.png" class="img-detail-goalkeeper margin-up-1" />
+                                            Azul
+                                        </td>
+                                        <td align="right" class="card-primary padding-right-5 header-text-white"><b>{{time1Goals(item)}}</b></td>
+                                        <td align="left" class="card-warning padding-left-5 header-text-white"><b>{{time2Goals(item)}}</b></td>
+                                        <td align="right" class="card-warning padding-right-5 header-text-white">
+                                            Amarelo
+                                            <img *ngIf="time1Goals(item) < time2Goals(item)" src="assets/images/win.png" class="img-detail-goalkeeper margin-up-1" />
+                                        </td>
+                                    </tr>
+
+                                    <tr *ngFor="let chieldItem of countAssistent(pegaLinhas(item)); let i = index;">
+                                        <td align="left" colspan="2" class="padding-5 border-right-1 same-width-td">
+                                            {{item.time1.length > i ? item.time1[i].name:''}}
+                                            <template [ngIf]="item.time1.length > i">
+                                                <img *ngFor="let a of countAssistent(item.time1[i].gols)" src="assets/images/gol.png" class="img-detail-mini" />
+                                                <img *ngFor="let a of countAssistent(item.time1[i].assistencias)" src="assets/images/Assitencia.png" class="img-detail-mini" />
+                                                <img *ngFor="let a of countAssistent(item.time1[i].golsContra)" src="assets/images/GolContra.png" class="img-detail-mini" />
+                                            </template>
+                                        </td>
+                                        <td align="right" colspan="2" class="padding-5 same-width-td">
+                                            <template [ngIf]="item.time2.length > i">
+                                                <img *ngFor="let a of countAssistent(item.time2[i].gols)" src="assets/images/gol.png" class="img-detail-mini-left" />
+                                                <img *ngFor="let a of countAssistent(item.time2[i].assistencias)" src="assets/images/Assitencia.png" class="img-detail-mini-left" />
+                                                <img *ngFor="let a of countAssistent(item.time2[i].golsContra)" src="assets/images/GolContra.png" class="img-detail-mini-left" />
+                                            </template>
+                                            {{item.time2.length > i ? item.time2[i].name:''}}
+                                        </td>
+                                    </tr>
+
+                                    <tr *ngIf="item.goleiroTime2 || item.goleiroTime1" class="tr-goalkeeper">
+                                        <td align="left" class="padding-left-5">
+                                            <template [ngIf]="item.goleiroTime1">
+                                                <img src="assets/images/goleiro.png" class="img-detail-goalkeeper-mini" />
+                                                {{item.goleiroTime1.name}}
+                                            </template>
+                                        </td>
+                                        <td align="right" class="padding-right-5 border-right-1">
+                                            <template [ngIf]="item.goleiroTime1">
+                                                <img *ngFor="let a of countAssistent(item.goleiroTime1.gols)" src="assets/images/gol.png" class="img-detail" />
+                                                <img *ngFor="let a of countAssistent(item.goleiroTime1.assistencias)" src="assets/images/Assitencia.png" class="img-detail" />
+                                                <img *ngFor="let a of countAssistent(item.goleiroTime1.golsContra)" src="assets/images/GolContra.png" class="img-detail" />
+                                            </template>
+                                        </td>
+                                        <td align="left" class="padding-left-5">
+                                            <template [ngIf]="item.goleiroTime2">
+                                                <img *ngFor="let a of countAssistent(item.goleiroTime2.gols)" src="assets/images/gol.png" class="img-detail" />
+                                                <img *ngFor="let a of countAssistent(item.goleiroTime2.assistencias)" src="assets/images/Assitencia.png" class="img-detail" />
+                                                <img *ngFor="let a of countAssistent(item.goleiroTime2.golsContra)" src="assets/images/GolContra.png" class="img-detail" />
+                                            </template>
+                                        </td>
+                                        <td align="right" class="padding-right-5">
+                                            <template [ngIf]="item.goleiroTime2">
+                                                {{item.goleiroTime2.name}}
+                                                <img src="assets/images/goleiro.png" class="img-detail-goalkeeper-mini" />
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

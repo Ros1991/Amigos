@@ -25,19 +25,28 @@
                         <span>&nbsp; Peladeiros</span>
                     </a>
                 </li>
-                <li>
-                    <a [routerLink]="['games']">
-                        <i class="fa fa-calendar"></i>
-                        <span>&nbsp; Peladas</span>
-                    </a>
-                </li>
-                <li>
-                    <a [routerLink]="['games']">
-                        <i class="fa fa-line-chart"></i>
-                        <span>&nbsp; Ranking</span>
-                    </a>
+
+
+                <li class="nested" [class.expand]="showMenu === 'Peladas'">
+                    <a (click)="addExpandClass('Peladas')"><i class="fa fa-calendar"></i><span>&nbsp;&nbsp; Peladas</span></a>
+                    <ul class="submenu">
+                        <li *ngFor='let item of years'>
+                            <a [routerLink]="['games', item]"><span>{{item}}</span></a>
+                        </li>
+                    </ul>
                 </li>
 
+                <li class="nested" [class.expand]="showMenu === 'Ranking'">
+                    <a (click)="addExpandClass('Ranking')"><i class="fa fa-line-chart"></i><span>&nbsp;&nbsp; Ranking</span></a>
+                    <ul class="submenu">
+                        <li>
+                            <a [routerLink]="['ranking', 'atual']"><span>Atual</span></a>
+                        </li>
+                        <li *ngFor='let item of years'>
+                            <a [routerLink]="['ranking', item]"><span>{{item}}</span></a>
+                        </li>
+                    </ul>
+                </li>
 
                 <li>
                     <a [routerLink]="['game']">

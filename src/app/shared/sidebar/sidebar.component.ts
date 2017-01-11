@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Http, Response} from "@angular/http";
 declare var $:any;
+
+import 'rxjs/add/operator/map';
 
 @Component({
 	selector: 'sidebar-cmp',
@@ -8,7 +11,12 @@ declare var $:any;
 
 export class SidebarComponent implements OnInit {
 	isActive = false;
-	showMenu: string = '';
+    showMenu: string = '';
+    years: Array<string>;
+
+    constructor(private http: Http) {
+        this.years = new Array<string>();
+    }
 
 	ngOnInit() {
 		var calendar:any = $('#calendar1');
@@ -18,7 +26,13 @@ export class SidebarComponent implements OnInit {
 			    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 			    alert('View: ' + view.name);
 			}
-		});
+        });
+
+        this.http.get('http://localhost:65248/api/Years').map((res: Response) => res.json())
+            .subscribe((items: Array<string>) => {
+                this.years = items;
+            });
+        
 		var sidebar: any = $('.sidenav-outer');
 		sidebar.perfectScrollbar();
 	}

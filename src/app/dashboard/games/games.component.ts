@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Partida, Jogador, JogoFinalizadoToSave } from '../game/partida';
+import { ActivatedRoute } from '@angular/router';
 
 import {Http, Response, Headers} from "@angular/http";
 
@@ -17,17 +18,31 @@ import 'rxjs/add/operator/toPromise';
 
 export class GamesComponent {
     public jogos: Array<JogoFinalizadoToSave>;
+    public selectedGame: JogoFinalizadoToSave;
     countAssistent: Function = Array;
+    year: number;
+    private sub: any;
 
-    public constructor(private http: Http) {
+    public constructor(private route: ActivatedRoute, private http: Http) {
     }
 
     ngOnInit() {
         this.jogos = new Array<JogoFinalizadoToSave>();
-        this.http.get('http://localhost:65248/api/Games').map((res: Response) => res.json())
-            .subscribe((items: Array<JogoFinalizadoToSave>) => {
-                this.jogos = items;
-            });
+        this.selectedGame = new JogoFinalizadoToSave();
+        this.sub = this.route.params.subscribe(params => {
+            this.year = +params['year'];
+            if (this.year) {
+                this.http.get('http://localhost:65248/api/Games/' + this.year).map((res: Response) => res.json())
+                    .subscribe((items: Array<JogoFinalizadoToSave>) => {
+                        this.jogos = items;
+                        this.selectedGame = this.jogos[0];
+                    });
+            }
+        });
+    }
+
+    selectChange(item) {
+        this.selectedGame = this.jogos[item.index];
     }
 
     pegaLinhas(item) {
