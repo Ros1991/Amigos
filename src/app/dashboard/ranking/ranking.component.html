@@ -1,0 +1,102 @@
+<div class="animate">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-inverse card-info card-header">
+                        <h5 class="card-inverse card-title">
+                            Ranking {{year}}
+                        </h5>
+                    </div>
+                    <div class="card-block">
+                        <md-tab-group (selectChange)="selectChange($event)">
+                            <md-tab>
+                                <template md-tab-label>
+                                    <b>Pontos</b>
+                                </template>
+                            </md-tab>
+                            <md-tab>
+                                <template md-tab-label>
+                                    <b>Média de pontos</b>
+                                </template>
+                            </md-tab>
+                            <md-tab>
+                                <template md-tab-label>
+                                    <b>Gols</b>
+                                </template>
+                            </md-tab>
+                            <md-tab>
+                                <template md-tab-label>
+                                    <b>Assistências</b>
+                                </template>
+                            </md-tab>
+                            <md-tab>
+                                <template md-tab-label>
+                                    <b>Jogos</b>
+                                </template>
+                            </md-tab>
+                            <md-tab>
+                                <template md-tab-label>
+                                    <b>Vitorias</b>
+                                </template>
+                            </md-tab>
+                            <md-tab>
+                                <template md-tab-label>
+                                    <b>Empates</b>
+                                </template>
+                            </md-tab>
+                            <md-tab>
+                                <template md-tab-label>
+                                    <b>Derrotas</b>
+                                </template>
+                            </md-tab>
+                            <md-tab>
+                                <template md-tab-label>
+                                    <b>Gols Contra</b>
+                                </template>
+                            </md-tab>
+                        </md-tab-group>
+                        <div class="card-block">
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Peladeiro</th>
+                                            <th>Pontos</th>
+                                            <th>Média de pontos</th>
+                                            <th>Gols</th>
+                                            <th>Assistências</th>
+                                            <th>Jogos</th>
+                                            <th>Vitorias</th>
+                                            <th>Empates</th>
+                                            <th>Derrotas</th>
+                                            <th>Gols Contra</th>
+                                            <th>Participações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>John</td>
+                                            <td>john@gmail.com</td>
+                                            <td>London, UK</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Andy</td>
+                                            <td>andygmail.com</td>
+                                            <td>Merseyside, UK</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Frank</td>
+                                            <td>frank@gmail.com</td>
+                                            <td>Southampton, UK</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
