@@ -1,0 +1,67 @@
+<top-nav></top-nav>
+
+<div class="portal-header">
+    <div class="width-container-pro">
+        <div class="title">
+            <a [routerLink]="['home']" class="logo">
+                <img src="assets/images/amigos.png" class="user-avatar" />
+            </a>
+        </div>
+        <div class="title title-text">
+            <span class="title-big white-text"><b>Amizade</b></span><br /> <span class="yellow-text"><b>cerveja e futebol</b></span>
+        </div>
+
+        <div class="menu-container">
+            <ul>
+                <li>
+                    <a [routerLink]="['home']">
+                        <i class="fa fa-home"></i>
+                        <span>&nbsp; <b>Home</b></span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['players']">
+                        <i class="fa fa-user"></i>
+                        <span>&nbsp; <b>Peladeiros</b></span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropbtn"><i class="fa fa-calendar"></i><span>&nbsp;&nbsp; <b>Peladas</b></span></a>
+                    <div class="dropdown-content">
+                        <ul class="submenu">
+                            <li *ngFor='let item of years'>
+                                <a [routerLink]="['games', item]"><span>{{item}}</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a class="dropbtn"><i class="fa fa-line-chart"></i><span>&nbsp;&nbsp; <b>Ranking</b></span></a>
+                    <div class="dropdown-content">
+                        <ul class="submenu">
+                            <li>
+                                <a [routerLink]="['ranking', 'atual']"><span>Atual</span></a>
+                            </li>
+                            <li *ngFor='let item of years'>
+                                <a [routerLink]="['ranking', item]"><span>{{item}}</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<sidebar-cmp class="portal-sidebar"></sidebar-cmp>
+<section class="main-container" [ngClass]="{sidebarPushRight: isActive}">
+    <router-outlet></router-outlet>
+</section>

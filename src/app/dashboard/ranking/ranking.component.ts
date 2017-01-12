@@ -28,10 +28,11 @@ export class RankingComponent {
         this.sub = this.route.params.subscribe(params => {
             this.year = params['year'];
             if (this.year) {
+                var param = this.year;
                 if (this.year == 'atual') {
-                    this.year = '0';
+                    param = '0';
                 }
-                this.http.get('http://localhost:65248/api/Ranking/' + this.year).map((res: Response) => res.json())
+                this.http.get('http://localhost:65248/api/Ranking/' + param).map((res: Response) => res.json())
                     .subscribe((items: Array<any>) => {
                         this.rankingPlayers = items.sort((n1, n2) => {
                             if (n1.Pontos > n2.Pontos) {

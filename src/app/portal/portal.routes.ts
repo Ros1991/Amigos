@@ -1,11 +1,11 @@
 import { Route, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
+import { PortalComponent } from './portal.component';
 
-const dashboardRoutes: Route[] = [
+const portalRoutes: Route[] = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 	{ 
-		path: '', component: DashboardComponent,
-		children: [
+		path: '', component: PortalComponent
+		,children: [
             { path: 'home', loadChildren: 'app/dashboard/home/home.module' },
 			{ path: 'typography', loadChildren: 'app/dashboard/typography/typography.module' },
 			{ path: 'grid', loadChildren: 'app/dashboard/grid/grid.module' },
@@ -33,4 +33,4 @@ const dashboardRoutes: Route[] = [
 	}
 ];
 
-export default RouterModule.forChild(dashboardRoutes)
+export default RouterModule.forChild(portalRoutes)
