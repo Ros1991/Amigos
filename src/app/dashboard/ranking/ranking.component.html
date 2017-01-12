@@ -17,7 +17,7 @@
                             </md-tab>
                             <md-tab>
                                 <template md-tab-label>
-                                    <b>Média de pontos</b>
+                                    <b>M&eacute;dia de pontos</b>
                                 </template>
                             </md-tab>
                             <md-tab>
@@ -27,7 +27,7 @@
                             </md-tab>
                             <md-tab>
                                 <template md-tab-label>
-                                    <b>Assistências</b>
+                                    <b>Assist&ecirc;ncias</b>
                                 </template>
                             </md-tab>
                             <md-tab>
@@ -63,32 +63,72 @@
                                         <tr>
                                             <th>Peladeiro</th>
                                             <th>Pontos</th>
-                                            <th>Média de pontos</th>
+                                            <th>M&eacute;dia de pontos</th>
                                             <th>Gols</th>
-                                            <th>Assistências</th>
+                                            <th>Assist&ecirc;ncias</th>
                                             <th>Jogos</th>
                                             <th>Vitorias</th>
                                             <th>Empates</th>
                                             <th>Derrotas</th>
                                             <th>Gols Contra</th>
-                                            <th>Participações</th>
+                                            <th>Participa&ccedil;&otilde;es</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor='let item of rankingPlayers'>
+                                            <td>{{item.Peladeiro}}</td>
+                                            <td>{{item.Pontos}}</td>
+                                            <td>{{item.MediaPontos}}</td>
+                                            <td>{{item.Gp}}</td>
+                                            <td>{{item.ast}}</td>
+                                            <td>{{item.jogos}}</td>
+                                            <td>{{item.Vitorias}}</td>
+                                            <td>{{item.Empates}}</td>
+                                            <td>{{item.Derrotas}}</td>
+                                            <td>{{item.gc}}</td>
+                                            <td>{{item.dias}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div class="card-block">
+                            <div class="table-responsive">
+                                <div class="card-block">
+							    <h4 class="card-title">Outros jogadores</h4>
+							    <p class="card-text">Jogadores sem participa&ccedil;&otilde;es suficiente para entrar no ranking.</p>
+						 	    </div>
+                                <table class="table table-condensed table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Peladeiro</th>
+                                            <th>Pontos</th>
+                                            <th>M&eacute;dia de pontos</th>
+                                            <th>Gols</th>
+                                            <th>Assist&ecirc;ncias</th>
+                                            <th>Jogos</th>
+                                            <th>Vitorias</th>
+                                            <th>Empates</th>
+                                            <th>Derrotas</th>
+                                            <th>Gols Contra</th>
+                                            <th>Participa&ccedil;&otilde;es</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>John</td>
-                                            <td>john@gmail.com</td>
-                                            <td>London, UK</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Andy</td>
-                                            <td>andygmail.com</td>
-                                            <td>Merseyside, UK</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Frank</td>
-                                            <td>frank@gmail.com</td>
-                                            <td>Southampton, UK</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </tbody>
                                 </table>

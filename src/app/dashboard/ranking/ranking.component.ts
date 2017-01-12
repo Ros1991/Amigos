@@ -15,8 +15,7 @@ import 'rxjs/add/operator/toPromise';
 
 
 export class RankingComponent {
-    public jogos: Array<JogoFinalizadoToSave>;
-    public selectedGame: JogoFinalizadoToSave;
+    public rankingPlayers: Array<any>;
     countAssistent: Function = Array;
     year: string;
     private sub: any;
@@ -25,22 +24,33 @@ export class RankingComponent {
     }
 
     ngOnInit() {
-        this.jogos = new Array<JogoFinalizadoToSave>();
-        this.selectedGame = new JogoFinalizadoToSave();
+        this.rankingPlayers = new Array<any>();
         this.sub = this.route.params.subscribe(params => {
             this.year = params['year'];
             if (this.year) {
-                //this.http.get('http://localhost:65248/api/Ranking/' + this.year).map((res: Response) => res.json())
-                //    .subscribe((items: Array<JogoFinalizadoToSave>) => {
-                //        this.jogos = items;
-                //        this.selectedGame = this.jogos[0];
-                //    });
+                if (this.year == 'atual') {
+                    this.year = '0';
+                }
+                this.http.get('http://localhost:65248/api/Ranking/' + this.year).map((res: Response) => res.json())
+                    .subscribe((items: Array<any>) => {
+                        this.rankingPlayers = items.sort((n1, n2) => {
+                            if (n1.Pontos > n2.Pontos) {
+                                return 1;
+                            }
+
+                            if (n1.Pontos < n2.Pontos) {
+                                return -1;
+                            }
+
+                            return 0;
+                        });
+                    });
             }
         });
     }
 
     selectChange(item) {
-        this.selectedGame = this.jogos[item.index];
+        //this.selectedGame = this.jogos[item.index];
     }
 
     pegaLinhas(item) {
