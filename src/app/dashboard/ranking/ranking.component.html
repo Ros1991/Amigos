@@ -15,130 +15,260 @@
                 <div class="card">
                     <div class="card-block">
                         <md-tab-group (selectChange)="selectChange($event)">
-                            <md-tab>
+                            <md-tab id="linha">
                                 <template md-tab-label>
-                                    <b>Pontos</b>
+                                    <b>Jogadores</b>
                                 </template>
+                                <md-tab-group (selectChange)="selectChange($event)">
+                                    <md-tab id="pontos">
+                                        <template md-tab-label>
+                                            <b>Pontos</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab id="media">
+                                        <template md-tab-label>
+                                            <b>M&eacute;dia</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab id="gols">
+                                        <template md-tab-label>
+                                            <b>Gols</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab id="ast">
+                                        <template md-tab-label>
+                                            <b>Assist.</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab id="jogos">
+                                        <template md-tab-label>
+                                            <b>Jogos</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab id="vitorias">
+                                        <template md-tab-label>
+                                            <b>Vitorias</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab id="empates">
+                                        <template md-tab-label>
+                                            <b>Empates</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab id="derrotas">
+                                        <template md-tab-label>
+                                            <b>Derrotas</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab id="golscontra">
+                                        <template md-tab-label>
+                                            <b>Gols Contra</b>
+                                        </template>
+                                    </md-tab>
+                                </md-tab-group>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Peladeiro</th>
+                                                    <th>Pontos</th>
+                                                    <th>M&eacute;dia de pontos</th>
+                                                    <th>Gols</th>
+                                                    <th>Assist&ecirc;ncias</th>
+                                                    <th>Jogos</th>
+                                                    <th>Vitorias</th>
+                                                    <th>Empates</th>
+                                                    <th>Derrotas</th>
+                                                    <th>Gols Contra</th>
+                                                    <th>Participa&ccedil;&otilde;es</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor='let item of rankingPlayers'>
+                                                    <td>{{item.Peladeiro}}</td>
+                                                    <td>{{item.Pontos}}</td>
+                                                    <td>{{item.MediaPontos}}</td>
+                                                    <td>{{item.Gp}}</td>
+                                                    <td>{{item.ast}}</td>
+                                                    <td>{{item.jogos}}</td>
+                                                    <td>{{item.Vitorias}}</td>
+                                                    <td>{{item.Empates}}</td>
+                                                    <td>{{item.Derrotas}}</td>
+                                                    <td>{{item.gc}}</td>
+                                                    <td>{{item.dias}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <div class="card-block">
+                                            <h4 class="card-title">Outros jogadores</h4>
+                                            <p class="card-text">Jogadores sem participa&ccedil;&otilde;es suficiente para entrar no ranking.</p>
+                                        </div>
+                                        <table class="table table-condensed table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Peladeiro</th>
+                                                    <th>Pontos</th>
+                                                    <th>M&eacute;dia de pontos</th>
+                                                    <th>Gols</th>
+                                                    <th>Assist&ecirc;ncias</th>
+                                                    <th>Jogos</th>
+                                                    <th>Vitorias</th>
+                                                    <th>Empates</th>
+                                                    <th>Derrotas</th>
+                                                    <th>Gols Contra</th>
+                                                    <th>Participa&ccedil;&otilde;es</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor='let item of outRanking'>
+                                                    <td>{{item.Peladeiro}}</td>
+                                                    <td>{{item.Pontos}}</td>
+                                                    <td>{{item.MediaPontos}}</td>
+                                                    <td>{{item.Gp}}</td>
+                                                    <td>{{item.ast}}</td>
+                                                    <td>{{item.jogos}}</td>
+                                                    <td>{{item.Vitorias}}</td>
+                                                    <td>{{item.Empates}}</td>
+                                                    <td>{{item.Derrotas}}</td>
+                                                    <td>{{item.gc}}</td>
+                                                    <td>{{item.dias}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </md-tab>
-                            <md-tab>
+                            <md-tab id="goleiros">
                                 <template md-tab-label>
-                                    <b>M&eacute;dia</b>
+                                    <b>Goleiros</b>
                                 </template>
-                            </md-tab>
-                            <md-tab>
-                                <template md-tab-label>
-                                    <b>Gols</b>
-                                </template>
-                            </md-tab>
-                            <md-tab>
-                                <template md-tab-label>
-                                    <b>Assist.</b>
-                                </template>
-                            </md-tab>
-                            <md-tab>
-                                <template md-tab-label>
-                                    <b>Jogos</b>
-                                </template>
-                            </md-tab>
-                            <md-tab>
-                                <template md-tab-label>
-                                    <b>Vitorias</b>
-                                </template>
-                            </md-tab>
-                            <md-tab>
-                                <template md-tab-label>
-                                    <b>Empates</b>
-                                </template>
-                            </md-tab>
-                            <md-tab>
-                                <template md-tab-label>
-                                    <b>Derrotas</b>
-                                </template>
-                            </md-tab>
-                            <md-tab>
-                                <template md-tab-label>
-                                    <b>Gols Contra</b>
-                                </template>
+                               <!--<md-tab-group (selectChange)="selectChangeGK($event)">
+                                    <md-tab>
+                                        <template md-tab-label>
+                                            <b>Pontos</b>
+                                        </template>
+                                    </md-tab>
+                                     <md-tab>
+                                        <template md-tab-label>
+                                            <b>Media</b>
+                                        </template>
+                                    </md-tab>
+                                   <md-tab>
+                                        <template md-tab-label>
+                                            <b>Gols sofridos</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab>
+                                        <template md-tab-label>
+                                            <b>M&eacute;dia Gols</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab>
+                                        <template md-tab-label>
+                                            <b>Jogos</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab>
+                                        <template md-tab-label>
+                                            <b>Vitorias</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab>
+                                        <template md-tab-label>
+                                            <b>Empates</b>
+                                        </template>
+                                    </md-tab>
+                                    <md-tab>
+                                        <template md-tab-label>
+                                            <b>Derrotas</b>
+                                        </template>
+                                    </md-tab>
+                                </md-tab-group>-->
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Peladeiro</th>
+                                                    <th>Pontos</th>
+                                                    <th>M&eacute;dia de pontos</th>
+                                                    <th>Gols sofridos</th>
+                                                    <th>M&eacute;dia de gols</th>
+                                                    <th>Jogos</th>
+                                                    <th>Vitorias</th>
+                                                    <th>Empates</th>
+                                                    <th>Derrotas</th>
+                                                    <th>Participa&ccedil;&otilde;es</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor='let item of rankingPlayersGK'>
+                                                    <td>{{item.Peladeiro}}</td>
+                                                    <td>{{item.Pontos}}</td>
+                                                    <td>{{item.MediaPontos}}</td>
+                                                    <td>{{item.gc}}</td>
+                                                    <td>{{item.MediaGols}}</td>
+                                                    <td>{{item.jogos}}</td>
+                                                    <td>{{item.Vitorias}}</td>
+                                                    <td>{{item.Empates}}</td>
+                                                    <td>{{item.Derrotas}}</td>
+                                                    <td>{{item.dias}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <div class="card-block">
+                                            <h4 class="card-title">Outros jogadores</h4>
+                                            <p class="card-text">Jogadores sem participa&ccedil;&otilde;es suficiente para entrar no ranking.</p>
+                                        </div>
+                                        <table class="table table-condensed table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Peladeiro</th>
+                                                    <th>Pontos</th>
+                                                    <th>M&eacute;dia de pontos</th>
+                                                    <th>Gols sofridos</th>
+                                                    <th>M&eacute;dia de gols</th>
+                                                    <th>Jogos</th>
+                                                    <th>Vitorias</th>
+                                                    <th>Empates</th>
+                                                    <th>Derrotas</th>
+                                                    <th>Participa&ccedil;&otilde;es</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor='let item of outRankingGK'>
+                                                    <td>{{item.Peladeiro}}</td>
+                                                    <td>{{item.Pontos}}</td>
+                                                    <td>{{item.MediaPontos}}</td>
+                                                    <td>{{item.gc}}</td>
+                                                    <td>{{item.MediaGols}}</td>
+                                                    <td>{{item.jogos}}</td>
+                                                    <td>{{item.Vitorias}}</td>
+                                                    <td>{{item.Empates}}</td>
+                                                    <td>{{item.Derrotas}}</td>
+                                                    <td>{{item.dias}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
                             </md-tab>
                         </md-tab-group>
-                        <div class="card-block">
-                            <div class="table-responsive">
-                                <table class="table table-condensed table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Peladeiro</th>
-                                            <th>Pontos</th>
-                                            <th>M&eacute;dia de pontos</th>
-                                            <th>Gols</th>
-                                            <th>Assist&ecirc;ncias</th>
-                                            <th>Jogos</th>
-                                            <th>Vitorias</th>
-                                            <th>Empates</th>
-                                            <th>Derrotas</th>
-                                            <th>Gols Contra</th>
-                                            <th>Participa&ccedil;&otilde;es</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor='let item of rankingPlayers'>
-                                            <td>{{item.Peladeiro}}</td>
-                                            <td>{{item.Pontos}}</td>
-                                            <td>{{item.MediaPontos}}</td>
-                                            <td>{{item.Gp}}</td>
-                                            <td>{{item.ast}}</td>
-                                            <td>{{item.jogos}}</td>
-                                            <td>{{item.Vitorias}}</td>
-                                            <td>{{item.Empates}}</td>
-                                            <td>{{item.Derrotas}}</td>
-                                            <td>{{item.gc}}</td>
-                                            <td>{{item.dias}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-
-                        <div class="card-block">
-                            <div class="table-responsive">
-                                <div class="card-block">
-							    <h4 class="card-title">Outros jogadores</h4>
-							    <p class="card-text">Jogadores sem participa&ccedil;&otilde;es suficiente para entrar no ranking.</p>
-						 	    </div>
-                                <table class="table table-condensed table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Peladeiro</th>
-                                            <th>Pontos</th>
-                                            <th>M&eacute;dia de pontos</th>
-                                            <th>Gols</th>
-                                            <th>Assist&ecirc;ncias</th>
-                                            <th>Jogos</th>
-                                            <th>Vitorias</th>
-                                            <th>Empates</th>
-                                            <th>Derrotas</th>
-                                            <th>Gols Contra</th>
-                                            <th>Participa&ccedil;&otilde;es</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
