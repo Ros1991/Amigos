@@ -56,11 +56,44 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-2  text-xs-right">Posi&ccedil;&atilde;o</label>
                         <div class="col-sm-10">
-                            <select class="form-control" name="positionInput"  [(ngModel)]="currentPlayer.Position">
+                            <select class="form-control" name="positionInput" [(ngModel)]="currentPlayer.Position">
                                 <option value="g">Goleiro</option>
                                 <option value="z">Zagueiro</option>
                                 <option value="m">Meio campista</option>
                                 <option value="a">Atacante</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2  text-xs-right">Time do cora&ccedil;&atilde;o</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="torcidaInput" [(ngModel)]="currentPlayer.Torcida">
+                                <option value="America Mineiro">America Mineiro</option>
+                                <option value="Atletico Mineiro">Atletico Mineiro</option>
+                                <option value="Atletico Paranaense">Atletico Paranaense</option>
+                                <option value="Bahia">Bahia</option>
+                                <option value="Botafogo">Botafogo</option>
+                                <option value="Ceara">Ceara</option>
+                                <option value="Chapecoense">Chapecoense</option>
+                                <option value="Corinthians">Corinthians</option>
+                                <option value="Coritiba">Coritiba</option>
+                                <option value="Cruzeiro">Cruzeiro</option>
+                                <option value="Figueirense">Figueirense</option>
+                                <option value="Flamengo">Flamengo</option>
+                                <option value="Fluminense">Fluminense</option>
+                                <option value="Fortaleza">Fortaleza</option>
+                                <option value="Goias">Goias</option>
+                                <option value="Gremio">Gremio</option>
+                                <option value="Internacional">Internacional</option>
+                                <option value="Palmeiras">Palmeiras</option>
+                                <option value="Ponte preta">Ponte preta</option>
+                                <option value="Santa Cruz">Santa Cruz</option>
+                                <option value="Santos">Santos</option>
+                                <option value="Sao Paulo">Sao Paulo</option>
+                                <option value="Sport">Sport</option>
+                                <option value="Vasco">Vasco</option>
+                                <option value="Vitoria">Vitoria</option>
                             </select>
                         </div>
                     </div>

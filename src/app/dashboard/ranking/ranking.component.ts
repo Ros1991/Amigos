@@ -81,6 +81,28 @@ export class RankingComponent {
 
                             return 0;
                         });
+                        this.rankingPlayersGK = this.rankingPlayersGK.sort((n1, n2) => {
+                            if (n1.Pontos > n2.Pontos) {
+                                return -1;
+                            }
+
+                            if (n1.Pontos < n2.Pontos) {
+                                return 1;
+                            }
+
+                            return 0;
+                        });
+                        this.outRankingGK = this.outRankingGK.sort((n1, n2) => {
+                            if (n1.Pontos > n2.Pontos) {
+                                return -1;
+                            }
+
+                            if (n1.Pontos < n2.Pontos) {
+                                return 1;
+                            }
+
+                            return 0;
+                        });
                     });
             }
         });

@@ -29,7 +29,7 @@
                                         <span *ngIf="allowEdit" class="team-member-edit"><a [routerLink]="['../../edit', item.Id]"><i class="fa fa-pencil"></i></a></span>
                                         <h4 class="margin-top-0 margin-bottom-10 text-primary"><a ui-sref="app.uni-staff-profile" class="ng-binding" href="#/app/university/staff-profile">{{item.NickName}}</a></h4>
                                         <span class="ng-binding">
-                                            <span *ngIf="item.Name && item.Name != ''">{{item.Name}}<br></span>
+                                            <span *ngIf="item.Name && item.Name != ''">{{item.Torcida}}<br></span>
                                             <span *ngIf="item.Position && item.Position != ''">{{getPosition(item.Position)}}<br></span>
                                             <span *ngIf="item.BirthdayDate && getAge(item.BirthdayDate) < 1000"><small>Idade:</small> {{getAge(item.BirthdayDate)}} Anos<br></span>
                                             <span *ngIf="item.Phone && item.Phone != ''"><small>Telefone:</small> {{item.Phone}}<br></span>
